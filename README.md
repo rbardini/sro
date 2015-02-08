@@ -19,7 +19,7 @@ Friendly Correios SRO API wrapper and command-line utility
 ## Usage
 
 ```js
-var sro = require("./");
+var sro = require("sro");
 
 sro.track("SS123456789BR", function(err, items, failures) {
   if (err) throw err;
