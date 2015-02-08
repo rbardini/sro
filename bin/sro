@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var version    = require("../package.json").version,
+    program    = require("commander"),
+    _          = require("lodash"),
+    sro        = require("../"),
+    formatters = sro.formatters;
+
+program
+  .version(version)
+  .usage("[options] <numbers...>")
+  .option("-o, --output <format>", "specify the output format (table|json|pretty) [table]", "table")
+  .option("-c, --check", "check tracking number check digit", false)
+  .parse(process.argv);
+
+var numbers   = program.args,
+    formatter = formatters[program.output.trim().toLowerCase()] || formatters.table,
+    options   = {
+      checkDigit: program.check,
+      onProgress: function printItem(progress, item) {
+        console.log(formatter.format([item]));
+      }
+    },
+    callback  = function printFailures(err, items, failures) {
+      if (err) throw err;
+      console.log(formatter.format(null, failures));
+    };
+
+if (!numbers.length) return program.help();
+
+sro.track(numbers, options, callback);
