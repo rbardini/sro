@@ -1,6 +1,6 @@
 {
   "name": "sro",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Friendly Correios SRO API wrapper and command-line utility",
   "author": "Rafael Bardini",
   "homepage": "https://github.com/rbardini/sro",
