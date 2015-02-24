@@ -17,7 +17,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "bin": "./bin/sro",
   "repository": {
@@ -41,5 +41,10 @@
     "moment": "^2.9.0",
     "request": "^2.53.0",
     "xml2js": "^0.4.4"
+  },
+  "devDependencies": {
+    "chai": "^2.1.0",
+    "chai-things": "^0.2.0",
+    "mocha": "^2.1.0"
   }
 }
