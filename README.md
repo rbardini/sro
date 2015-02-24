@@ -1,6 +1,9 @@
 SRO
 ===
 
+[![npm package version](https://img.shields.io/npm/v/sro.svg)](https://www.npmjs.com/package/sro)
+[![Dependency status](https://img.shields.io/david/rbardini/sro.svg)](https://david-dm.org/rbardini/sro)
+
 Friendly Correios SRO API wrapper and command-line utility
 
 ## Features
