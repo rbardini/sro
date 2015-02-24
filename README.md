@@ -4,16 +4,7 @@ SRO
 [![npm package version](https://img.shields.io/npm/v/sro.svg)](https://www.npmjs.com/package/sro)
 [![Dependency status](https://img.shields.io/david/rbardini/sro.svg)](https://david-dm.org/rbardini/sro)
 
-Friendly Correios SRO API wrapper and command-line utility
-
-## Features
-
-- Validates tracking numbers and their check digits
-- Makes multiple API requests in batch if possible
-- Strips empty or whitespace-only fields
-- Creates proper `Date` objects from item events
-- Handles crazy server responses, like unclosed XML tags
-- Provides command-line utility with human-readable output
+Friendly Correios SRO API wrapper and command-line utility.
 
 ## Installation
 
@@ -43,6 +34,15 @@ If installed globally using the npm `-g` flag, SRO can also be invoked from the 
     $ sro SS123456789BR
 
 Run `$ sro --help` for more information.
+
+## Features
+
+- Validates tracking numbers and their check digits
+- Makes multiple API requests in batch if possible
+- Strips empty or whitespace-only fields
+- Creates proper `Date` objects from item events
+- Handles crazy server responses, like unclosed XML tags
+- Provides command-line utility with human-readable output
 
 ## Documentation
 
