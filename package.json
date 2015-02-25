@@ -37,6 +37,7 @@
     "cli-table": "^0.3.1",
     "commander": "^2.6.0",
     "country-data": "0.0.18",
+    "iconv-lite": "^0.4.7",
     "lodash": "^3.1.0",
     "moment": "^2.9.0",
     "request": "^2.53.0",
