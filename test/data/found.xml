@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<sroxml>
+   <versao>1.0</versao>
+   <qtd>1</qtd>
+   <TipoPesquisa>Lista de Objetos</TipoPesquisa>
+   <TipoResultado>Todos os eventos</TipoResultado>
+     <objeto>
+       <numero>SS123456789BR</numero>
+       <evento>
+          <tipo>RO</tipo>
+          <status>01</status>
+          <data>09/02/2015</data>
+          <hora>17:32</hora>
+          <descricao>Objeto encaminhado</descricao>
+          <local>AC LUCAS DO RIO VERDE</local>
+          <codigo>78455970</codigo>
+          <cidade>Lucas Do Rio Verde</cidade>
+          <uf>MT</uf>
+          <sto>24300691</sto>
+       <destino>
+          <local>AC SINOP</local>
+          <codigo>78550970</codigo>
+          <cidade>Sinop</cidade>
+          <bairro>Centro</bairro>
+          <uf>MT</uf>
+       </destino>
+      </evento>
+       <evento>
+          <tipo>DO</tipo>
+          <status>01</status>
+          <data>03/02/2015</data>
+          <hora>15:28</hora>
+          <descricao>Objeto encaminhado</descricao>
+          <local>AC LUCAS DO RIO VERDE</local>
+          <codigo>78455970</codigo>
+          <cidade>Lucas Do Rio Verde</cidade>
+          <uf>MT</uf>
+          <sto>24300691</sto>
+       <destino>
+          <local>AC SINOP</local>
+          <codigo>78550970</codigo>
+          <cidade>Sinop</cidade>
+          <bairro>Centro</bairro>
+          <uf>MT</uf>
+       </destino>
+      </evento>
+       <evento>
+          <tipo>FC</tipo>
+          <status>03</status>
+          <data>03/02/2015</data>
+          <hora>15:26</hora>
+          <descricao>Objeto mal encaminhado</descricao>
+          <local>AC LUCAS DO RIO VERDE</local>
+          <codigo>78455970</codigo>
+          <cidade>Lucas Do Rio Verde</cidade>
+          <uf>MT</uf>
+          <sto>24300691</sto>
+      </evento>
+       <evento>
+          <tipo>BDR</tipo>
+          <status>01</status>
+          <data>28/01/2015</data>
+          <hora>08:50</hora>
+          <descricao>Objeto entregue ao destinatário</descricao>
+          <local>CTCE MANAUS</local>
+          <codigo>69060978</codigo>
+          <cidade>Manaus</cidade>
+          <uf>AM</uf>
+          <sto>00032542</sto>
+      </evento>
+     </objeto>
+</sroxml>

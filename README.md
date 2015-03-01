@@ -110,7 +110,6 @@ Represents the status of an item at an specific point in time.
 
 ## TODO
 
-- Write tests with mocked responses
 - Add last event-only tracking option
 - Add validation-only CLI option
 - Support custom user credentials
