@@ -34,10 +34,7 @@
   "bugs": {
     "url": "https://github.com/rbardini/sro/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/rbardini/sro/raw/master/LICENSE"
-  },
+  "license": "MIT",
   "dependencies": {
     "async": "^1.4.2",
     "chalk": "^1.1.1",
