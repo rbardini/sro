@@ -1,5 +1,4 @@
 language: node_js
 node_js:
-  - "node"
-  - "iojs"
-script: npm run-script test-ci
+  - 4
+script: npm run ci

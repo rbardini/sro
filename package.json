@@ -17,9 +17,14 @@
   ],
   "main": "index.js",
   "scripts": {
+    "lint": "snazzy",
+    "pretest": "npm run lint",
     "test": "mocha",
-    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
-    "test-ci": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage"
+    "prepublish": "npm test",
+    "coverage": "istanbul cover _mocha",
+    "preci": "npm run pretest",
+    "ci": "npm run coverage -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "postci": "rm -rf ./coverage"
   },
   "bin": "./bin/sro",
   "repository": {
@@ -52,6 +57,8 @@
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.0.0",
-    "sinon": "^1.17.1"
+    "sinon": "^1.17.1",
+    "snazzy": "^2.0.1",
+    "standard": "^5.3.1"
   }
 }
