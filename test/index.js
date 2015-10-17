@@ -7,12 +7,11 @@ var sro     = require("../"),
     expect  = chai.expect;
 
 chai.use(require("chai-things"));
-iconv.extendNodeEncodings();
 
 function stubRequest(type, callback) {
   var file = __dirname + "/data/" + type + ".xml";
 
-  fs.readFile(file, "iso-8859-1", function(err, data) {
+  fs.readFile(file, function(err, data) {
     if (err) callback(err);
 
     var stub = sinon.stub(request, "post").yields(null, null, data);
