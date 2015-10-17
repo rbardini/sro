@@ -34,24 +34,24 @@
     "url": "https://github.com/rbardini/sro/raw/master/LICENSE"
   },
   "dependencies": {
-    "async": "^0.9.0",
-    "chalk": "^1.0.0",
+    "async": "^1.4.2",
+    "chalk": "^1.1.1",
     "cli-table": "^0.3.1",
-    "commander": "^2.6.0",
-    "country-data": "0.0.18",
-    "iconv-lite": "^0.4.7",
-    "lodash": "^3.1.0",
-    "moment": "^2.9.0",
-    "request": "^2.53.0",
-    "xml2js": "^0.4.4"
+    "commander": "^2.9.0",
+    "country-data": "0.0.23",
+    "iconv-lite": "^0.4.13",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "request": "^2.65.0",
+    "xml2js": "^0.4.13"
   },
   "devDependencies": {
-    "chai": "^2.1.0",
+    "chai": "^3.3.0",
     "chai-things": "^0.2.0",
-    "coveralls": "^2.11.2",
-    "istanbul": "^0.3.6",
-    "mocha": "^2.1.0",
-    "mocha-lcov-reporter": "0.0.2",
-    "sinon": "^1.12.2"
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.0.0",
+    "sinon": "^1.17.1"
   }
 }
