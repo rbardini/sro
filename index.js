@@ -1,1 +1,1 @@
-module.exports = require("./lib/sro");
+module.exports = require('./lib/sro')

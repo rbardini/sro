@@ -5,6 +5,7 @@ SRO
 [![Build status](https://img.shields.io/travis/rbardini/sro.svg)](https://travis-ci.org/rbardini/sro)
 [![Code coverage](https://img.shields.io/coveralls/rbardini/sro.svg)](https://coveralls.io/r/rbardini/sro)
 [![Dependency status](https://img.shields.io/david/rbardini/sro.svg)](https://david-dm.org/rbardini/sro)
+[![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Friendly Correios SRO API wrapper and command-line utility.
 
@@ -15,20 +16,20 @@ Friendly Correios SRO API wrapper and command-line utility.
 ## Usage
 
 ```js
-var sro = require("sro");
+var sro = require('sro')
 
-sro.track("SS123456789BR", function(err, items, failures) {
-  if (err) throw err;
+sro.track('SS123456789BR', function (err, items, failures) {
+  if (err) throw err
 
-  items.forEach(function(item) {
-    var status = item.status();
-    if (status != null) console.log(status.get("descricao"));
-  });
+  items.forEach(function (item) {
+    var status = item.status()
+    if (status != null) console.log(status.get('descricao'))
+  })
 
-  failures.forEach(function(failure) {
-    console.log(failure.error);
-  });
-});
+  failures.forEach(function (failure) {
+    console.log(failure.error)
+  })
+})
 ```
 
 If installed globally using the npm `-g` flag, SRO can also be invoked from the command-line:
