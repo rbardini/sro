@@ -1,3 +1,5 @@
-exports.table = require('./table')
-exports.json = require('./json')
-exports.pretty = require('./pretty')
+import table from './table'
+import json from './json'
+import pretty from './pretty'
+
+export {table, json, pretty}

@@ -1,40 +1,40 @@
-var _ = require('lodash')
-var moment = require('moment')
-var chalk = require('chalk')
-var Table = require('cli-table')
+import _ from 'lodash'
+import moment from 'moment'
+import chalk from 'chalk'
+import Table from 'cli-table'
 
-var SYMBOLS = {pass: '✓', fail: '✖'}
+const SYMBOLS = {pass: '✓', fail: '✖'}
 
-var TableFormatter = {
-  format: function format (items, failures) {
-    var formattedItems = _.reduce(items, function (result, item) {
+const TableFormatter = {
+  format: (items, failures) => {
+    var formattedItems = _.reduce(items, (result, item) => {
       var header = '\n ' + chalk.bold(item.get('numero')) + '\n ' + item.countryName() + ' via ' + item.service()
       var table = new Table({
         head: ['Data', 'Local', 'Situação']
       })
 
-      item.events().forEach(function (event) {
+      item.events().forEach((event) => {
         var data = moment(event.date()).format('lll')
-        var local = event.get('local') + ' - ' + event.get('cidade') + '/' + event.get('uf')
+        var local = `${event.get('local')} - ${event.get('cidade')}/${event.get('uf')}`
         var descricao = event.get('descricao')
         var destino = event.get('destino')
 
         if (destino) {
-          local += '\nEm trânsito para ' + destino.local + ' - ' + destino.cidade + '/' + destino.uf
+          local += `\nEm trânsito para ${destino.local} - ${destino.cidade}/${destino.uf}`
         }
 
         table.push([data, local, descricao])
       })
 
-      return result + header + '\n' + table.toString() + '\n'
+      return `${result}${header}\n${table.toString()}\n`
     }, '')
 
-    var formattedFailures = _.reduce(failures, function (result, failure) {
-      return result + '\n ' + chalk.bold(failure.numero) + '\n ' + chalk.red(SYMBOLS.fail + ' ' + failure.error + '\n')
-    }, '')
+    var formattedFailures = _.reduce(failures, (result, failure) => (
+      `${result}\n ${chalk.bold(failure.numero)}\n ${chalk.red(`${SYMBOLS.fail} ${failure.error}\n`)}`
+    ), '')
 
     return formattedItems + formattedFailures
   }
 }
 
-exports = module.exports = TableFormatter
+export default TableFormatter

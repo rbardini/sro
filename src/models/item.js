@@ -1,69 +1,64 @@
-var _ = require('lodash')
-var util = require('util')
-var countries = require('country-data').countries
+import _ from 'lodash'
+import {countries} from 'country-data'
 
-var Model = require('./model')
-var Event = require('./event')
+import Model from './model'
+import Event from './event'
 
-var SERVICES = require('../../data/services.json')
+import SERVICES from '../../data/services.json'
 
-var Item = (function () {
-  function Item (number, attributes) {
-    Item.super_.call(this, attributes)
+class Item extends Model {
+  constructor (number, ...args) {
+    super(...args)
 
     this._normalize(number)
     this._events = this._createEvents()
   }
 
-  util.inherits(Item, Model)
-
-  Item.prototype.number = function () {
+  number () {
     return this.get('numero')
   }
 
-  Item.prototype.serviceCode = function () {
+  serviceCode () {
     return this.number().slice(0, 2)
   }
 
-  Item.prototype.service = function () {
+  service () {
     return SERVICES[this.serviceCode()]
   }
 
-  Item.prototype.countryCode = function () {
+  countryCode () {
     return this.number().slice(-2)
   }
 
-  Item.prototype.countryName = function () {
+  countryName () {
     return (this.country() || {}).name
   }
 
-  Item.prototype.country = function () {
+  country () {
     return countries[this.countryCode()]
   }
 
-  Item.prototype.events = function () {
+  events () {
     return this._events
   }
 
-  Item.prototype.status = function () {
+  status () {
     return this.events()[0]
   }
 
-  Item.prototype.found = function () {
+  found () {
     return this.status() != null
   }
 
-  Item.prototype._normalize = function (number) {
+  _normalize (number) {
     _.defaults(this._attributes, {numero: number, evento: []})
   }
 
-  Item.prototype._createEvents = function () {
+  _createEvents () {
     return this.get('evento').map(function (event) {
       return new Event(event)
     })
   }
+}
 
-  return Item
-})()
-
-exports = module.exports = Item
+export default Item

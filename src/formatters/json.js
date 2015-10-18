@@ -1,17 +1,12 @@
-var _ = require('lodash')
+import _ from 'lodash'
 
-var JSONFormatter = {
-  format: function format (items, failures) {
-    var formattedItems = _.reduce(items, function (result, item) {
-      return result + JSON.stringify(item._attributes)
-    }, '')
-
-    var formattedFailures = _.reduce(failures, function (result, failure) {
-      return result + JSON.stringify(failure)
-    }, '')
+const JSONFormatter = {
+  format: (items, failures) => {
+    var formattedItems = _.reduce(items, (result, item) => result + JSON.stringify(item._attributes), '')
+    var formattedFailures = _.reduce(failures, (result, failure) => result + JSON.stringify(failure), '')
 
     return formattedItems + formattedFailures
   }
 }
 
-exports = module.exports = JSONFormatter
+export default JSONFormatter

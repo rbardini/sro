@@ -16,17 +16,17 @@ Friendly Correios SRO API wrapper and command-line utility.
 ## Usage
 
 ```js
-var sro = require('sro')
+import sro from 'sro'
 
-sro.track('SS123456789BR', function (err, items, failures) {
+sro.track('SS123456789BR', (err, items, failures) => {
   if (err) throw err
 
-  items.forEach(function (item) {
+  items.forEach(item => {
     var status = item.status()
     if (status != null) console.log(status.get('descricao'))
   })
 
-  failures.forEach(function (failure) {
+  failures.forEach(failure => {
     console.log(failure.error)
   })
 })

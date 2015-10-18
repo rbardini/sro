@@ -1,23 +1,19 @@
-var _ = require('lodash')
-var async = require('async')
-var iconv = require('iconv-lite')
-var request = require('request')
-var xml2js = require('xml2js')
+import _ from 'lodash'
+import async from 'async'
+import iconv from 'iconv-lite'
+import request from 'request'
+import xml2js from 'xml2js'
 
-var formatters = require('./formatters')
-var Item = require('./models').Item
+import formatters from './formatters'
+import {Item} from './models/'
 
-var ENDPOINT = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos'
-var DEFAULTS = {usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T'}
+const ENDPOINT = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos'
+const DEFAULTS = {usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T'}
 
-function normalize (number) {
-  return number.trim().toUpperCase()
-}
+const normalize = number => number.trim().toUpperCase()
 
-function checkDigit (number) {
-  var sum = _.reduce([8, 6, 4, 2, 3, 5, 9, 7], function (sum, weight, i) {
-    return sum + number.charCodeAt(i + 2) * weight
-  }, 0)
+const checkDigit = number => {
+  var sum = [8, 6, 4, 2, 3, 5, 9, 7].reduce((sum, weight, i) => sum + number.charCodeAt(i + 2) * weight, 0)
 
   var mod = sum % 11
   var dv = mod === 0 ? 5 : mod === 1 ? 0 : 11 - mod
@@ -25,9 +21,9 @@ function checkDigit (number) {
   return dv === +number.charAt(10)
 }
 
-function track (numbers, options, callback) {
-  callback = callback || _.noop
+const track = function (numbers, options, callback) {
   options = options || {}
+  callback = callback || _.noop
 
   if (_.isFunction(options)) {
     callback = options
@@ -45,25 +41,23 @@ function track (numbers, options, callback) {
   var count
 
   numbers = _(numbers)
-    .filter(function (number) {
-      return validate(number, options, function (err, pass, failure) {
-        if (err) throw err
-        if (!pass.length) failures.push(failure[0])
-      })
-    })
+    .filter(number => validate(number, options, (err, pass, failure) => {
+      if (err) throw err
+      if (!pass.length) failures.push(failure[0])
+    }))
     .map(normalize)
     .uniq()
-    .tap(function (numbers) { count = numbers.length })
+    .tap(numbers => { count = numbers.length })
     .chunk(2)
     .value()
 
-  async.each(numbers, function (chunk, callback) {
-    var objetos = _.reduce(chunk, function (result, number) { return result + number })
+  async.each(numbers, (chunk, callback) => {
+    var objetos = _.reduce(chunk, (result, number) => result + number)
     var form = _.defaults({objetos: objetos}, DEFAULTS)
 
     async.waterfall([
       function (callback) {
-        request.post({uri: ENDPOINT, encoding: null, form: form}, callback)
+        request.post({uri: ENDPOINT, encoding: null, form}, callback)
       },
 
       function (response, body, callback) {
@@ -81,10 +75,8 @@ function track (numbers, options, callback) {
         var objetos = _.flatten([result.objeto])
         var items = []
 
-        items = _.map(chunk, function (number) {
-          var objeto = _.find(objetos, function (objeto) {
-            return objeto && objeto.numero === number
-          })
+        items = _.map(chunk, number => {
+          var objeto = _.find(objetos, objeto => objeto && objeto.numero === number)
           return new Item(number, objeto)
         })
 
@@ -93,7 +85,7 @@ function track (numbers, options, callback) {
 
       function (err, result) {
         if (!err) {
-          _.forEach(result, function (item) {
+          _.forEach(result, item => {
             items.push(item)
             onProgress(++tracked / count, item)
           })
@@ -111,9 +103,9 @@ function track (numbers, options, callback) {
   })
 }
 
-function validate (numbers, options, callback) {
-  callback = callback || _.noop
+const validate = function (numbers, options, callback) {
   options = options || {}
+  callback = callback || _.noop
 
   if (_.isFunction(options)) {
     callback = options
@@ -127,7 +119,7 @@ function validate (numbers, options, callback) {
   var passes = []
   var failures = []
 
-  _.forEach(numbers, function (number) {
+  _.forEach(numbers, number => {
     var result = {numero: number}
 
     if (number == null) {
@@ -169,6 +161,4 @@ function validate (numbers, options, callback) {
   return failures.length === 0
 }
 
-exports.track = track
-exports.validate = validate
-exports.formatters = formatters
+export default {track, validate, formatters}

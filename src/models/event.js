@@ -1,11 +1,10 @@
-var _ = require('lodash')
-var util = require('util')
+import _ from 'lodash'
 
-var Model = require('./model')
+import Model from './model'
 
-var Event = (function () {
-  function Event (attributes) {
-    Event.super_.call(this, attributes)
+class Event extends Model {
+  constructor (...args) {
+    super(...args)
 
     this._normalize()
     this._date = this._createDate()
@@ -13,13 +12,11 @@ var Event = (function () {
     this.compact()
   }
 
-  util.inherits(Event, Model)
-
-  Event.prototype.date = function () {
+  date () {
     return this._date
   }
 
-  Event.prototype._normalize = function () {
+  _normalize () {
     var descricao = this.get('descricao')
 
     if (_.isPlainObject(descricao)) {
@@ -29,20 +26,15 @@ var Event = (function () {
     }
   }
 
-  Event.prototype._createDate = function () {
+  _createDate () {
     var data = this.get('data').split('/')
     var hora = this.get('hora').split(':')
 
-    var day = data[0]
-    var month = data[1]
-    var year = data[2]
-    var hour = hora[0]
-    var minute = hora[1]
+    var [day, month, year] = data
+    var [hour, minute] = hora
 
     return new Date(year, month - 1, day, hour, minute)
   }
+}
 
-  return Event
-})()
-
-exports = module.exports = Event
+export default Event

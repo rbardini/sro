@@ -1,2 +1,4 @@
-exports.Item = require('./item')
-exports.Event = require('./event')
+import Item from './item'
+import Event from './event'
+
+export {Item, Event}

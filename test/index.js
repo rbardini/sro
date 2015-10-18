@@ -1,17 +1,17 @@
 /* eslint-env mocha */
-var sro = require('../')
-var chai = require('chai')
-var fs = require('fs')
-var request = require('request')
-var sinon = require('sinon')
-var expect = chai.expect
+import sro from '../'
+import chai, {expect} from 'chai'
+import chaiThings from 'chai-things'
+import fs from 'fs'
+import request from 'request'
+import sinon from 'sinon'
 
-chai.use(require('chai-things'))
+chai.use(chaiThings)
 
-function stubRequest (type, callback) {
-  var file = __dirname + '/data/' + type + '.xml'
+const stubRequest = (type, callback) => {
+  var file = `${__dirname}/data/${type}.xml`
 
-  fs.readFile(file, function (err, data) {
+  fs.readFile(file, (err, data) => {
     if (err) callback(err)
 
     var stub = sinon.stub(request, 'post').yields(null, null, data)
@@ -19,13 +19,11 @@ function stubRequest (type, callback) {
   })
 }
 
-function restoreRequest () {
-  request.post.restore()
-}
+const restoreRequest = () => request.post.restore()
 
-describe('Validation', function () {
-  it('should refuse null and undefined tracking numbers', function (done) {
-    sro.validate([null, void 0], function (err, passes, failures) {
+describe('Validation', () => {
+  it('should refuse null and undefined tracking numbers', (done) => {
+    sro.validate([null, void 0], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.be.empty
       expect(failures).to.have.length(2)
@@ -34,8 +32,8 @@ describe('Validation', function () {
     })
   })
 
-  it('should refuse non-string tracking numbers', function (done) {
-    sro.validate([{}, [], function () {}, new Date()], function (err, passes, failures) {
+  it('should refuse non-string tracking numbers', (done) => {
+    sro.validate([{}, [], () => {}, new Date()], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.be.empty
       expect(failures).to.have.length(4)
@@ -44,8 +42,8 @@ describe('Validation', function () {
     })
   })
 
-  it('should refuse empty tracking numbers', function (done) {
-    sro.validate(['', '  '], function (err, passes, failures) {
+  it('should refuse empty tracking numbers', (done) => {
+    sro.validate(['', '  '], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.be.empty
       expect(failures).to.have.length(2)
@@ -54,8 +52,8 @@ describe('Validation', function () {
     })
   })
 
-  it('should refuse tracking numbers without 13 digits', function (done) {
-    sro.validate(['SS123456789B', 'SS123456789BRA'], function (err, passes, failures) {
+  it('should refuse tracking numbers without 13 digits', (done) => {
+    sro.validate(['SS123456789B', 'SS123456789BRA'], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.be.empty
       expect(failures).to.have.length(2)
@@ -64,8 +62,8 @@ describe('Validation', function () {
     })
   })
 
-  it('should refuse non-standard tracking numbers', function (done) {
-    sro.validate(['SSS12345678BR', 'SS12345678BRA'], function (err, passes, failures) {
+  it('should refuse non-standard tracking numbers', (done) => {
+    sro.validate(['SSS12345678BR', 'SS12345678BRA'], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.be.empty
       expect(failures).to.have.length(2)
@@ -74,16 +72,16 @@ describe('Validation', function () {
     })
   })
 
-  it('should ignore tracking number check digits by default', function (done) {
-    sro.validate(['SS123456785BR', 'SS123456789BR'], function (err, passes, failures) {
+  it('should ignore tracking number check digits by default', (done) => {
+    sro.validate(['SS123456785BR', 'SS123456789BR'], (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.have.length(2)
       done()
     })
   })
 
-  it('should check tracking number check digits when required', function (done) {
-    sro.validate(['SS123456785BR', 'SS123456789BR'], {checkDigit: true}, function (err, passes, failures) {
+  it('should check tracking number check digits when required', (done) => {
+    sro.validate(['SS123456785BR', 'SS123456789BR'], {checkDigit: true}, (err, passes, failures) => {
       expect(err).to.not.exist
       expect(passes).to.have.length(1)
       expect(failures).to.have.length(1)
@@ -93,13 +91,13 @@ describe('Validation', function () {
   })
 })
 
-describe('Tracking', function () {
-  describe('found', function () {
+describe('Tracking', () => {
+  describe('found', () => {
     beforeEach(stubRequest.bind(null, 'found'))
     afterEach(restoreRequest)
 
-    it('should filter out invalid tracking numbers', function (done) {
-      sro.track(['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA'], function (err, items, failures) {
+    it('should filter out invalid tracking numbers', (done) => {
+      sro.track(['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA'], (err, items, failures) => {
         expect(err).to.not.exist
         expect(items).to.have.length(1)
         expect(failures).to.have.length(2)
@@ -107,8 +105,8 @@ describe('Tracking', function () {
       })
     })
 
-    it('should normalize tracking numbers', function (done) {
-      sro.track(' ss123456789br  ', function (err, items, failures) {
+    it('should normalize tracking numbers', (done) => {
+      sro.track(' ss123456789br  ', (err, items, failures) => {
         expect(err).to.not.exist
         expect(items).to.have.length(1)
         expect(items[0].number()).to.equal('SS123456789BR')
@@ -117,8 +115,8 @@ describe('Tracking', function () {
       })
     })
 
-    it('should ignore duplicate tracking numbers', function (done) {
-      sro.track('SS123456789BR', 'SS123456789BR', function (err, items, failures) {
+    it('should ignore duplicate tracking numbers', (done) => {
+      sro.track('SS123456789BR', 'SS123456789BR', (err, items, failures) => {
         expect(err).to.not.exist
         expect(items).to.have.length(1)
         expect(failures).to.be.empty
@@ -126,8 +124,8 @@ describe('Tracking', function () {
       })
     })
 
-    it('should make multiple API requests in batch', function (done) {
-      sro.track(['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR'], function (err, items, failures) {
+    it('should make multiple API requests in batch', (done) => {
+      sro.track(['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR'], (err, items, failures) => {
         expect(err).to.not.exist
         expect(items).to.have.length(4)
         expect(failures).to.be.empty
@@ -136,13 +134,13 @@ describe('Tracking', function () {
       })
     })
 
-    it('should allow progress reporting', function (done) {
-      var onProgress = sinon.spy(function (progress, item) {
+    it('should allow progress reporting', (done) => {
+      var onProgress = sinon.spy((progress, item) => {
         expect(progress).to.be.within(0, 1)
         expect(item).to.exist
       })
 
-      sro.track(['SS123456789BR', 'SS223456789BR', 'SS323456789BR'], {onProgress: onProgress}, function (err, items, failures) {
+      sro.track(['SS123456789BR', 'SS223456789BR', 'SS323456789BR'], {onProgress: onProgress}, (err, items, failures) => {
         expect(err).to.not.exist
         expect(onProgress).to.have.property('callCount', 3)
         done()
@@ -150,12 +148,12 @@ describe('Tracking', function () {
     })
   })
 
-  describe('not found', function () {
+  describe('not found', () => {
     beforeEach(stubRequest.bind(null, 'not-found'))
     afterEach(restoreRequest)
 
-    it('should handle an item not found', function (done) {
-      sro.track('SS123456789BR', function (err, items, failures) {
+    it('should handle an item not found', (done) => {
+      sro.track('SS123456789BR', (err, items, failures) => {
         expect(err).to.not.exist
         expect(items).to.have.length(1)
         expect(failures).to.be.empty
@@ -165,15 +163,15 @@ describe('Tracking', function () {
   })
 })
 
-describe('Models', function () {
+describe('Models', () => {
   var number = 'SS123456789BR'
   var item = null
 
-  before(function (done) {
-    stubRequest('found', function (err, stub) {
+  before((done) => {
+    stubRequest('found', (err, stub) => {
       if (err) done(err)
 
-      sro.track(number, function (err, items, failures) {
+      sro.track(number, (err, items, failures) => {
         if (err) done(err)
 
         restoreRequest()
@@ -183,52 +181,52 @@ describe('Models', function () {
     })
   })
 
-  describe('Item', function () {
-    it('should have a number', function () {
+  describe('Item', () => {
+    it('should have a number', () => {
       expect(item.number()).to.equal(number)
     })
 
-    it('should have a service code', function () {
+    it('should have a service code', () => {
       expect(item.serviceCode()).to.equal('SS')
     })
 
-    it('should have a service', function () {
+    it('should have a service', () => {
       expect(item.service()).to.equal('SEDEX FÍSICO')
     })
 
-    it('should have a country code', function () {
+    it('should have a country code', () => {
       expect(item.countryCode()).to.equal('BR')
     })
 
-    it('should have a country name', function () {
+    it('should have a country name', () => {
       expect(item.countryName()).to.equal('Brazil')
     })
 
-    it('should have a country', function () {
+    it('should have a country', () => {
       expect(item.country()).to.exist
     })
 
-    it('should have events', function () {
+    it('should have events', () => {
       expect(item.events()).to.have.length(4)
     })
 
-    it('should have a status', function () {
+    it('should have a status', () => {
       expect(item.status()).to.exist
     })
 
-    it('should be found', function () {
+    it('should be found', () => {
       expect(item.found()).to.be.true
     })
   })
 
-  describe('Event', function () {
+  describe('Event', () => {
     var event = null
 
-    before(function () {
+    before(() => {
       event = item.status()
     })
 
-    it('should have a date', function () {
+    it('should have a date', () => {
       expect(event).to.exist
       expect(event.date()).to.be.a('date')
     })
