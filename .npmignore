@@ -1,6 +1,7 @@
-src/
-test/
-coverage/
 .babelrc
 .npmignore
 .travis.yml
+.nyc_output/
+src/
+test/
+coverage/
