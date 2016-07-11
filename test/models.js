@@ -2,7 +2,7 @@ import {test} from 'tap'
 import sro from '../'
 import {stubRequest, restoreRequest} from './fixtures/'
 
-var number = 'SS123456789BR'
+var number = 'TE123456789BR'
 var item = null
 
 test('setup', (t) => {
@@ -26,12 +26,12 @@ test('Item', (t) => {
   })
 
   t.test('have a service code', (t) => {
-    t.equal(item.serviceCode(), 'SS')
+    t.equal(item.serviceCode(), 'TE')
     t.end()
   })
 
   t.test('have a service', (t) => {
-    t.equal(item.service(), 'SEDEX FÍSICO')
+    t.equal(item.service(), 'TESTE (OBJETO PARA TREINAMENTO)')
     t.end()
   })
 
@@ -51,7 +51,7 @@ test('Item', (t) => {
   })
 
   t.test('have events', (t) => {
-    t.equal(item.events().length, 4)
+    t.equal(item.events().length, 31)
     t.end()
   })
 

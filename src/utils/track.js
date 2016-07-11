@@ -1,15 +1,11 @@
 import _ from 'lodash'
 import async from 'async'
-import iconv from 'iconv-lite'
-import request from 'request'
 import xml2js from 'xml2js'
 
 import {Item} from '../models/'
 import normalize from './normalize'
 import validate from './validate'
-
-const ENDPOINT = 'http://websro.correios.com.br/sro_bin/sroii_xml.eventos'
-const DEFAULTS = {usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T'}
+import apiRequest from './apiRequest'
 
 const track = (numbers, options, callback) => {
   options = options || {}
@@ -38,34 +34,31 @@ const track = (numbers, options, callback) => {
     .map(normalize)
     .uniq()
     .tap(numbers => { count = numbers.length })
-    .chunk(2)
+    .chunk(20)
     .value()
 
   async.each(numbers, (chunk, callback) => {
-    var objetos = _.reduce(chunk, (result, number) => result + number)
-    var form = _.defaults({objetos: objetos}, DEFAULTS)
-
     async.waterfall([
       function (callback) {
-        request.post({uri: ENDPOINT, encoding: null, form}, callback)
+        apiRequest({objetos: chunk}, callback)
       },
 
       function (response, body, callback) {
-        xml2js.parseString(iconv.decode(body, 'iso-8859-1'), {
+        xml2js.parseString(body, {
+          async: true,
           explicitArray: false,
           explicitRoot: false,
+          ignoreAttrs: true,
           normalize: true,
           normalizeTags: true,
-          strict: false,
-          trim: true
+          trim: true,
+          tagNameProcessors: [name => name.substr(name.indexOf(':') + 1)]
         }, callback)
       },
 
       function (result, callback) {
-        var objetos = _.flatten([result.objeto])
-        var items = []
-
-        items = _.map(chunk, number => {
+        var objetos = _.flatten([result.body.buscaeventoslistaresponse.return.objeto])
+        var items = _.map(chunk, number => {
           var objeto = _.find(objetos, objeto => objeto && objeto.numero === number)
           return new Item(number, objeto)
         })

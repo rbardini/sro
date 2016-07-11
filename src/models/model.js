@@ -9,8 +9,8 @@ class Model {
     return (this._attributes[name] = attr)
   }
 
-  unset (name, attr) {
-    return this.set(name, void 0)
+  unset (name) {
+    return delete this._attributes[name]
   }
 
   get (attr) {
@@ -22,11 +22,11 @@ class Model {
   }
 
   forEach (iteratee) {
-    return _.forEach(this._attributes, iteratee, this)
+    return _.forEach(this._attributes, iteratee)
   }
 
   compact () {
-    this.forEach(function (value, name) {
+    this.forEach((value, name) => {
       if (_.isString(value) && _.isEmpty(value.trim())) {
         this.unset(name)
       }

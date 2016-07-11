@@ -1,5 +1,1 @@
-<?xml version="1.0" encoding="iso-8859-1" ?>
-<sroxml>
-   <versao>1.0</versao>
-     <error>Objetos não encontrados</error>
-</sroxml>
+<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Header><X-OPNET-Transaction-Trace:X-OPNET-Transaction-Trace xmlns:X-OPNET-Transaction-Trace="http://opnet.com">pid=156890,requestid=32daab15ed0f0c3cf122e8edd23b376a055ccc5311d0d89e</X-OPNET-Transaction-Trace:X-OPNET-Transaction-Trace></soapenv:Header><soapenv:Body><ns2:buscaEventosListaResponse xmlns:ns2="http://resource.webservice.correios.com.br/"><return><versao>2.0</versao><qtd>1</qtd><objeto><numero>TE123456789BR</numero><erro>Objeto nï¿½o encontrado na base de dados dos Correios.</erro></objeto></return></ns2:buscaEventosListaResponse></soapenv:Body></soapenv:Envelope>

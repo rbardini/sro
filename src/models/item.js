@@ -55,9 +55,7 @@ class Item extends Model {
   }
 
   _createEvents () {
-    return this.get('evento').map(function (event) {
-      return new Event(event)
-    })
+    return this.get('evento').map(event => new Event(event))
   }
 }
 

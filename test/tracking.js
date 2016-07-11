@@ -52,7 +52,7 @@ test('Found', (t) => {
       t.error(err)
       t.equal(items.length, 4)
       t.equal(failures.length, 0)
-      t.equal(request.post.callCount, 2)
+      t.equal(request.post.callCount, 1)
       t.end()
     })
   })
