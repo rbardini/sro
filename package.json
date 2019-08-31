@@ -21,9 +21,9 @@
     "watch": "npm run build -- --watch",
     "lint": "standard | snazzy",
     "pretest": "npm run build && npm run lint",
-    "test": "tap test/*.js --coverage-report=lcov",
+    "test": "tap test/*.js",
     "prepublish": "npm test",
-    "coverage": "coveralls"
+    "coverage": "tap test/*.js --coverage-report=text-lcov | coveralls"
   },
   "bin": "./bin/sro",
   "repository": {
