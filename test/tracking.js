@@ -1,8 +1,8 @@
 import request from 'request'
 import sinon from 'sinon'
-import {test} from 'tap'
+import { test } from 'tap'
 import sro from '../'
-import {stubRequest, restoreRequest} from './fixtures/'
+import { stubRequest, restoreRequest } from './fixtures/'
 
 test('Found', (t) => {
   t.beforeEach(stubRequest.bind(null, 'found'))
@@ -64,7 +64,7 @@ test('Found', (t) => {
       t.ok(numbers.includes(item.number()))
     })
     t.plan(8)
-    sro.track(numbers, {onProgress}, (err, items, failures) => {
+    sro.track(numbers, { onProgress }, (err, items, failures) => {
       t.error(err)
       t.equal(onProgress.callCount, 3)
       t.end()

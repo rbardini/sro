@@ -4,11 +4,11 @@ import request from 'request'
 const REQUEST_URL = 'http://webservice.correios.com.br/service/rastro'
 const REQUEST_HEADERS = {
   'Content-Type': 'text/xml; charset=utf-8',
-  'SOAPAction': 'http://resource.webservice.correios.com.br/buscaEventos'
+  SOAPAction: 'http://resource.webservice.correios.com.br/buscaEventos'
 }
-const DEFAULT_OPTIONS = {usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T', lingua: '101'}
+const DEFAULT_OPTIONS = { usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T', lingua: '101' }
 
-const buildEnvelope = ({usuario, senha, tipo, resultado, lingua, objetos}) => (
+const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) => (
   `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/">
     <soap:Body>
       <res:buscaEventosLista>

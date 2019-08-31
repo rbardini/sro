@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {countries} from 'country-data'
+import { countries } from 'country-data'
 
 import Model from './model'
 import Event from './event'
@@ -51,11 +51,13 @@ class Item extends Model {
   }
 
   _normalize (number) {
-    _.defaults(this._attributes, {numero: number, evento: []})
+    _.defaults(this._attributes, { numero: number, evento: [] })
   }
 
   _createEvents () {
-    return this.get('evento').map(event => new Event(event))
+    return _
+      .flatten([this.get('evento')])
+      .map(event => new Event(event))
   }
 }
 

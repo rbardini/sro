@@ -19,12 +19,11 @@
   "scripts": {
     "build": "babel src/ -d lib/",
     "watch": "npm run build -- --watch",
-    "lint": "snazzy",
-    "pretestone": "npm run build && npm run lint",
-    "testone": "tap --nyc-arg=--require --nyc-arg=babel-register --nyc-arg=--require --nyc-arg=babel-polyfill --coverage --coverage-report=text-summary",
-    "test": "npm run testone test/*.js",
+    "lint": "standard | snazzy",
+    "pretest": "npm run build && npm run lint",
+    "test": "tap test/*.js --coverage-report=lcov",
     "prepublish": "npm test",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "coveralls"
   },
   "bin": "./bin/sro",
   "repository": {
@@ -36,11 +35,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "async": "^2.0.0-rc.5",
-    "chalk": "^1.1.3",
+    "async": "^3.1.0",
+    "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
-    "commander": "^2.9.0",
-    "country-data": "0.0.24",
+    "commander": "^3.0.1",
+    "country-data": "^0.0.31",
     "lodash": "^4.12.0",
     "moment": "^2.13.0",
     "request": "^2.72.0",
@@ -48,17 +47,16 @@
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
-    "babel-eslint": "^6.0.4",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "babel-polyfill": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-register": "^6.9.0",
-    "coveralls": "^2.11.9",
-    "nyc": "^6.4.4",
-    "sinon": "^1.17.4",
-    "snazzy": "^4.0.0",
-    "standard": "^7.1.0",
-    "tap": "^5.7.1"
+    "coveralls": "^3.0.6",
+    "sinon": "^7.4.1",
+    "snazzy": "^8.0.0",
+    "standard": "^14.1.0",
+    "tap": "^14.6.1"
   },
   "standard": {
     "parser": "babel-eslint"

@@ -3,7 +3,7 @@ import moment from 'moment'
 import chalk from 'chalk'
 import Table from 'cli-table'
 
-const SYMBOLS = {pass: '✓', fail: '✖'}
+const SYMBOLS = { pass: '✓', fail: '✖' }
 
 const TableFormatter = {
   format: (items, failures) => {

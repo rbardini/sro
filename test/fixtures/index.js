@@ -18,4 +18,4 @@ const restoreRequest = (callback) => {
   if (callback) callback()
 }
 
-export {stubRequest, restoreRequest}
+export { stubRequest, restoreRequest }

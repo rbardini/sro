@@ -1,8 +1,8 @@
-import {test} from 'tap'
+import { test } from 'tap'
 import sro from '../'
 
 test('refuse null and undefined tracking numbers', (t) => {
-  var numbers = [null, void 0]
+  var numbers = [null, undefined]
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -70,7 +70,7 @@ test('ignore tracking number check digits by default', (t) => {
 test('check tracking number check digits when required', (t) => {
   var numbers = ['SS123456785BR', 'SS123456789BR']
   t.plan(5)
-  sro.validate(numbers, {checkDigit: true}, (err, passes, failures) => {
+  sro.validate(numbers, { checkDigit: true }, (err, passes, failures) => {
     t.error(err)
     t.equal(passes.length, 1)
     t.equal(passes[0].numero, numbers[0])

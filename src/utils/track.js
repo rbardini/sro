@@ -2,7 +2,7 @@ import _ from 'lodash'
 import async from 'async'
 import xml2js from 'xml2js'
 
-import {Item} from '../models/'
+import { Item } from '../models/'
 import normalize from './normalize'
 import validate from './validate'
 import apiRequest from './apiRequest'
@@ -40,7 +40,7 @@ const track = (numbers, options, callback) => {
   async.each(numbers, (chunk, callback) => {
     async.waterfall([
       function (callback) {
-        apiRequest({objetos: chunk}, callback)
+        apiRequest({ objetos: chunk }, callback)
       },
 
       function (response, body, callback) {
@@ -64,18 +64,19 @@ const track = (numbers, options, callback) => {
         })
 
         callback(null, items)
-      }],
-
-      function (err, result) {
-        if (!err) {
-          _.forEach(result, item => {
-            items.push(item)
-            onProgress(++tracked / count, item)
-          })
-        }
-
-        callback(err)
       }
+    ],
+
+    function (err, result) {
+      if (!err) {
+        _.forEach(result, item => {
+          items.push(item)
+          onProgress(++tracked / count, item)
+        })
+      }
+
+      callback(err)
+    }
     )
   }, function (err) {
     if (err) {

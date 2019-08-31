@@ -20,7 +20,7 @@ const validate = (numbers, options, callback) => {
   var failures = []
 
   _.forEach(numbers, number => {
-    var result = {numero: number}
+    var result = { numero: number }
 
     if (number == null) {
       result.error = 'Tracking number is null or undefined'

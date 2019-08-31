@@ -1,4 +1,4 @@
 import Item from './item'
 import Event from './event'
 
-export default {Item, Event}
+export default { Item, Event }

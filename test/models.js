@@ -1,6 +1,6 @@
-import {test} from 'tap'
+import { test } from 'tap'
 import sro from '../'
-import {stubRequest, restoreRequest} from './fixtures/'
+import { stubRequest, restoreRequest } from './fixtures/'
 
 var number = 'TE123456789BR'
 var item = null
