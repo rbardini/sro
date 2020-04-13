@@ -21,8 +21,9 @@
     "watch": "npm run build -- --watch",
     "lint": "standard | snazzy",
     "pretest": "npm run build && npm run lint",
+    "pretest:ci": "npm run pretest",
     "test": "tap test/*.js",
-    "coverage": "tap test/*.js --coverage-report=text-lcov | coveralls"
+    "test:ci": "tap test/*.js --coverage-report=text-lcov | coveralls"
   },
   "bin": "./bin/sro",
   "repository": {
@@ -50,6 +51,7 @@
     "@babel/preset-env": "7.9.5",
     "babel-plugin-add-module-exports": "1.0.2",
     "coveralls": "3.0.11",
+    "semantic-release": "17.0.4",
     "sinon": "9.0.2",
     "snazzy": "8.0.0",
     "standard": "14.3.3",

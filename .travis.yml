@@ -2,4 +2,13 @@ language: node_js
 node_js:
   - lts/*
   - node
-after_success: npm run coverage
+script: npm run test:ci
+jobs:
+  include:
+    - stage: release
+      node_js: lts/*
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: npx semantic-release
