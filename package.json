@@ -20,8 +20,7 @@
     "build": "babel src/ -d lib/",
     "watch": "npm run build -- --watch",
     "lint": "standard | snazzy",
-    "test": "tap test/*.js",
-    "test:ci": "tap test/*.js --coverage-report=text-lcov | coveralls"
+    "test": "tap test/*.js"
   },
   "bin": "./bin/sro",
   "repository": {
@@ -48,7 +47,6 @@
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
     "babel-plugin-add-module-exports": "1.0.2",
-    "coveralls": "3.0.11",
     "semantic-release": "17.0.4",
     "sinon": "9.0.2",
     "snazzy": "8.0.0",
