@@ -2,7 +2,7 @@ SRO
 ===
 
 [![npm package version](https://img.shields.io/npm/v/sro.svg)](https://www.npmjs.com/package/sro)
-[![Build status](https://img.shields.io/travis/rbardini/sro.svg)](https://travis-ci.org/rbardini/sro)
+[![Build status](https://img.shields.io/github/workflow/status/rbardini/sro/Main)](https://github.com/rbardini/sro/actions)
 [![Code coverage](https://img.shields.io/coveralls/rbardini/sro.svg)](https://coveralls.io/r/rbardini/sro)
 [![Dependency status](https://img.shields.io/david/rbardini/sro.svg)](https://david-dm.org/rbardini/sro)
 [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
