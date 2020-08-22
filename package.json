@@ -33,23 +33,23 @@
   "license": "MIT",
   "dependencies": {
     "async": "3.2.0",
-    "chalk": "4.0.0",
+    "chalk": "4.1.0",
     "cli-table": "0.3.1",
-    "commander": "5.0.0",
+    "commander": "6.0.0",
     "country-data": "0.0.31",
-    "lodash": "4.17.15",
-    "moment": "2.24.0",
+    "lodash": "4.17.20",
+    "moment": "2.27.0",
     "request": "2.88.2",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
-    "@babel/cli": "7.8.4",
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.5",
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.11.4",
+    "@babel/preset-env": "7.11.0",
     "babel-plugin-add-module-exports": "1.0.2",
-    "sinon": "9.0.2",
+    "sinon": "9.0.3",
     "snazzy": "8.0.0",
-    "standard": "14.3.3",
-    "tap": "14.10.7"
+    "standard": "14.3.4",
+    "tap": "14.10.8"
   }
 }
