@@ -16,11 +16,11 @@ const validate = (numbers, options, callback) => {
     numbers = [numbers]
   }
 
-  var passes = []
-  var failures = []
+  const passes = []
+  const failures = []
 
   _.forEach(numbers, number => {
-    var result = { numero: number }
+    const result = { numero: number }
 
     if (number == null) {
       result.error = 'Tracking number is null or undefined'
@@ -32,7 +32,7 @@ const validate = (numbers, options, callback) => {
       return failures.push(result)
     }
 
-    var normalizedNumber = normalize(number)
+    const normalizedNumber = normalize(number)
 
     if (normalizedNumber.length === 0) {
       result.error = 'Tracking number is empty'

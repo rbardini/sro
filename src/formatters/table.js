@@ -7,17 +7,17 @@ const SYMBOLS = { pass: '✓', fail: '✖' }
 
 const TableFormatter = {
   format: (items, failures) => {
-    var formattedItems = _.reduce(items, (result, item) => {
-      var header = '\n ' + chalk.bold(item.get('numero')) + '\n ' + item.countryName() + ' via ' + item.service()
-      var table = new Table({
+    const formattedItems = _.reduce(items, (result, item) => {
+      const header = '\n ' + chalk.bold(item.get('numero')) + '\n ' + item.countryName() + ' via ' + item.service()
+      const table = new Table({
         head: ['Data', 'Local', 'Situação']
       })
 
       item.events().forEach((event) => {
-        var data = moment(event.date()).format('lll')
-        var local = `${event.get('local')} - ${event.get('cidade')}/${event.get('uf')}`
-        var descricao = event.get('descricao')
-        var destino = event.get('destino')
+        const data = moment(event.date()).format('lll')
+        let local = `${event.get('local')} - ${event.get('cidade')}/${event.get('uf')}`
+        const descricao = event.get('descricao')
+        const destino = event.get('destino')
 
         if (destino) {
           local += `\nEm trânsito para ${destino.local} - ${destino.cidade}/${destino.uf}`
@@ -29,7 +29,7 @@ const TableFormatter = {
       return `${result}${header}\n${table.toString()}\n`
     }, '')
 
-    var formattedFailures = _.reduce(failures, (result, failure) => (
+    const formattedFailures = _.reduce(failures, (result, failure) => (
       `${result}\n ${chalk.bold(failure.numero)}\n ${chalk.red(`${SYMBOLS.fail} ${failure.error}\n`)}`
     ), '')
 

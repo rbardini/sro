@@ -2,7 +2,7 @@ import { test } from 'tap'
 import sro from '../'
 
 test('refuse null and undefined tracking numbers', (t) => {
-  var numbers = [null, undefined]
+  const numbers = [null, undefined]
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -13,7 +13,7 @@ test('refuse null and undefined tracking numbers', (t) => {
 })
 
 test('refuse non-string tracking numbers', (t) => {
-  var numbers = [{}, [], () => {}, new Date()]
+  const numbers = [{}, [], () => {}, new Date()]
   t.plan(6)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -24,7 +24,7 @@ test('refuse non-string tracking numbers', (t) => {
 })
 
 test('refuse empty tracking numbers', (t) => {
-  var numbers = ['', '  ']
+  const numbers = ['', '  ']
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -35,7 +35,7 @@ test('refuse empty tracking numbers', (t) => {
 })
 
 test('refuse tracking numbers without 13 digits', (t) => {
-  var numbers = ['SS123456789B', 'SS123456789BRA']
+  const numbers = ['SS123456789B', 'SS123456789BRA']
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -46,7 +46,7 @@ test('refuse tracking numbers without 13 digits', (t) => {
 })
 
 test('refuse non-standard tracking numbers', (t) => {
-  var numbers = ['SSS12345678BR', 'SS12345678BRA']
+  const numbers = ['SSS12345678BR', 'SS12345678BRA']
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -57,7 +57,7 @@ test('refuse non-standard tracking numbers', (t) => {
 })
 
 test('ignore tracking number check digits by default', (t) => {
-  var numbers = ['SS123456785BR', 'SS123456789BR']
+  const numbers = ['SS123456785BR', 'SS123456789BR']
   t.plan(4)
   sro.validate(numbers, (err, passes, failures) => {
     t.error(err)
@@ -68,7 +68,7 @@ test('ignore tracking number check digits by default', (t) => {
 })
 
 test('check tracking number check digits when required', (t) => {
-  var numbers = ['SS123456785BR', 'SS123456789BR']
+  const numbers = ['SS123456785BR', 'SS123456789BR']
   t.plan(5)
   sro.validate(numbers, { checkDigit: true }, (err, passes, failures) => {
     t.error(err)

@@ -12,9 +12,9 @@ program
   .parse(process.argv)
 
 var numbers = program.args
-var formatter = formatters[program.output.trim().toLowerCase()] || formatters.table
+var formatter = formatters[program.opts().output.trim().toLowerCase()] || formatters.table
 var options = {
-  checkDigit: program.check,
+  checkDigit: program.opts().check,
   onProgress: function printItem (progress, item) {
     console.log(formatter.format([item]))
   }

@@ -9,7 +9,7 @@ test('Found', (t) => {
   t.afterEach(restoreRequest)
 
   t.test('filter out invalid tracking numbers', (t) => {
-    var numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
+    const numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
     t.plan(6)
     sro.track(numbers, (err, items, failures) => {
       t.error(err)
@@ -22,7 +22,7 @@ test('Found', (t) => {
   })
 
   t.test('normalize tracking numbers', (t) => {
-    var number = ' ss123456789br  '
+    const number = ' ss123456789br  '
     t.plan(4)
     sro.track(number, (err, items, failures) => {
       t.error(err)
@@ -34,7 +34,7 @@ test('Found', (t) => {
   })
 
   t.test('ignore duplicate tracking numbers', (t) => {
-    var number = 'SS123456789BR'
+    const number = 'SS123456789BR'
     t.plan(4)
     sro.track(number, number, (err, items, failures) => {
       t.error(err)
@@ -46,7 +46,7 @@ test('Found', (t) => {
   })
 
   t.test('make multiple API requests in batch', (t) => {
-    var numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR']
+    const numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR']
     t.plan(4)
     sro.track(numbers, (err, items, failures) => {
       t.error(err)
@@ -58,7 +58,7 @@ test('Found', (t) => {
   })
 
   t.test('allow progress reporting', (t) => {
-    var numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR']
+    const numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR']
     const onProgress = sinon.spy((progress, item) => {
       t.ok(progress >= 0 && progress <= 1)
       t.ok(numbers.includes(item.number()))
@@ -79,7 +79,7 @@ test('Not found', (t) => {
   t.afterEach(restoreRequest)
 
   t.test('handle an item not found', (t) => {
-    var number = 'SS123456789BR'
+    const number = 'SS123456789BR'
     t.plan(4)
     sro.track(number, (err, items, failures) => {
       t.error(err)

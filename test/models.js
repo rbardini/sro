@@ -2,8 +2,8 @@ import { test } from 'tap'
 import sro from '../'
 import { stubRequest, restoreRequest } from './fixtures/'
 
-var number = 'TE123456789BR'
-var item = null
+const number = 'TE123456789BR'
+let item = null
 
 test('setup', (t) => {
   stubRequest('found', (err, stub) => {
@@ -69,7 +69,7 @@ test('Item', (t) => {
 })
 
 test('Event', (t) => {
-  var event = null
+  let event = null
 
   t.test('setup', (t) => {
     event = item.status()
