@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import normalize from './normalize'
-import checkDigit from './checkDigit'
+import normalize from './normalize.js'
+import checkDigit from './checkDigit.js'
 
 const validate = (numbers, options, callback) => {
   options = options || {}

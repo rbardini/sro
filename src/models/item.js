@@ -1,10 +1,10 @@
 import _ from 'lodash'
 import { countries } from 'country-data'
 
-import Model from './model'
-import Event from './event'
+import Model from './model.js'
+import Event from './event.js'
 
-import SERVICES from '../../data/services.json'
+import SERVICES from '../../data/services.js'
 
 class Item extends Model {
   constructor (number, ...args) {

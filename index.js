@@ -1,1 +1,1 @@
-module.exports = require('./lib/sro')
+export * from './src/sro.js'

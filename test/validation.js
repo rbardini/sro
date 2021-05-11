@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import sro from '../'
+import * as sro from '../index.js'
 
 test('refuse null and undefined tracking numbers', (t) => {
   const numbers = [null, undefined]

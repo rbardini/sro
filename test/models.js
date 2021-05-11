@@ -1,21 +1,19 @@
 import { test } from 'tap'
-import sro from '../'
-import { stubRequest, restoreRequest } from './fixtures/'
+import * as sro from '../index.js'
+import { stubRequest, restoreRequest } from './fixtures/index.js'
 
 const number = 'TE123456789BR'
 let item = null
 
 test('setup', (t) => {
-  stubRequest('found', (err, stub) => {
+  stubRequest('found')
+
+  sro.track(number, (err, items) => {
+    restoreRequest()
+
     if (err) return t.bailout(err)
-
-    sro.track(number, (err, items, failures) => {
-      restoreRequest()
-
-      if (err) return t.bailout(err)
-      item = items[0]
-      t.end()
-    })
+    item = items[0]
+    t.end()
   })
 })
 

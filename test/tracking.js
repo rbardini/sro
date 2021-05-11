@@ -1,12 +1,12 @@
 import request from 'request'
 import sinon from 'sinon'
 import { test } from 'tap'
-import sro from '../'
-import { stubRequest, restoreRequest } from './fixtures/'
+import * as sro from '../index.js'
+import { stubRequest, restoreRequest } from './fixtures/index.js'
 
 test('Found', (t) => {
-  t.beforeEach(stubRequest.bind(null, 'found'))
-  t.afterEach(restoreRequest)
+  t.beforeEach(() => stubRequest('found'))
+  t.afterEach(() => restoreRequest())
 
   t.test('filter out invalid tracking numbers', (t) => {
     const numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
@@ -16,7 +16,7 @@ test('Found', (t) => {
       t.equal(items.length, 1)
       t.equal(items[0].number(), numbers[1])
       t.equal(failures.length, 2)
-      failures.forEach((failure) => t.notEqual(failure.numero, numbers[1]))
+      failures.forEach((failure) => t.not(failure.numero, numbers[1]))
       t.end()
     })
   })
@@ -75,8 +75,8 @@ test('Found', (t) => {
 })
 
 test('Not found', (t) => {
-  t.beforeEach(stubRequest.bind(null, 'not-found'))
-  t.afterEach(restoreRequest)
+  t.beforeEach(() => stubRequest('not-found'))
+  t.afterEach(() => restoreRequest())
 
   t.test('handle an item not found', (t) => {
     const number = 'SS123456789BR'

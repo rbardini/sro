@@ -16,7 +16,7 @@ Friendly Correios SRO API wrapper and command-line utility.
 ## Usage
 
 ```js
-import sro from 'sro'
+import * as sro from 'sro'
 
 sro.track('SS123456789BR', (err, items, failures) => {
   if (err) throw err

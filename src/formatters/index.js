@@ -1,5 +1,3 @@
-import table from './table'
-import json from './json'
-import pretty from './pretty'
-
-export default { table, json, pretty }
+export { default as table } from './table.js'
+export { default as json } from './json.js'
+export { default as pretty } from './pretty.js'

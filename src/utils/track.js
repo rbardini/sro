@@ -2,10 +2,10 @@ import _ from 'lodash'
 import async from 'async'
 import xml2js from 'xml2js'
 
-import { Item } from '../models/'
-import normalize from './normalize'
-import validate from './validate'
-import apiRequest from './apiRequest'
+import { Item } from '../models/index.js'
+import normalize from './normalize.js'
+import validate from './validate.js'
+import apiRequest from './apiRequest.js'
 
 const track = (numbers, options, callback) => {
   options = options || {}

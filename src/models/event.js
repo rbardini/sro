@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import Model from './model'
+import Model from './model.js'
 
 class Event extends Model {
   constructor (...args) {
