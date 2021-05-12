@@ -2,10 +2,10 @@ import _ from 'lodash'
 import async from 'async'
 import xml2js from 'xml2js'
 
-import { Item } from '../models/'
-import normalize from './normalize'
-import validate from './validate'
-import apiRequest from './apiRequest'
+import { Item } from '../models/index.js'
+import normalize from './normalize.js'
+import validate from './validate.js'
+import apiRequest from './apiRequest.js'
 
 const track = (numbers, options, callback) => {
   options = options || {}
@@ -20,11 +20,11 @@ const track = (numbers, options, callback) => {
     numbers = [numbers]
   }
 
-  var onProgress = _.isFunction(options.onProgress) ? options.onProgress : _.noop
-  var tracked = 0
-  var items = []
-  var failures = []
-  var count
+  const onProgress = _.isFunction(options.onProgress) ? options.onProgress : _.noop
+  let tracked = 0
+  const items = []
+  const failures = []
+  let count
 
   numbers = _(numbers)
     .filter(number => validate(number, options, (err, pass, failure) => {
@@ -57,9 +57,9 @@ const track = (numbers, options, callback) => {
       },
 
       function (result, callback) {
-        var objetos = _.flatten([result.body.buscaeventoslistaresponse.return.objeto])
-        var items = _.map(chunk, number => {
-          var objeto = _.find(objetos, objeto => objeto && objeto.numero === number)
+        const objetos = _.flatten([result.body.buscaeventoslistaresponse.return.objeto])
+        const items = _.map(chunk, number => {
+          const objeto = _.find(objetos, objeto => objeto && objeto.numero === number)
           return new Item(number, objeto)
         })
 

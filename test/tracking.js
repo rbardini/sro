@@ -1,28 +1,28 @@
 import request from 'request'
 import sinon from 'sinon'
 import { test } from 'tap'
-import sro from '../'
-import { stubRequest, restoreRequest } from './fixtures/'
+import * as sro from '../index.js'
+import { stubRequest, restoreRequest } from './fixtures/index.js'
 
 test('Found', (t) => {
-  t.beforeEach(stubRequest.bind(null, 'found'))
-  t.afterEach(restoreRequest)
+  t.beforeEach(() => stubRequest('found'))
+  t.afterEach(() => restoreRequest())
 
   t.test('filter out invalid tracking numbers', (t) => {
-    var numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
+    const numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
     t.plan(6)
     sro.track(numbers, (err, items, failures) => {
       t.error(err)
       t.equal(items.length, 1)
       t.equal(items[0].number(), numbers[1])
       t.equal(failures.length, 2)
-      failures.forEach((failure) => t.notEqual(failure.numero, numbers[1]))
+      failures.forEach((failure) => t.not(failure.numero, numbers[1]))
       t.end()
     })
   })
 
   t.test('normalize tracking numbers', (t) => {
-    var number = ' ss123456789br  '
+    const number = ' ss123456789br  '
     t.plan(4)
     sro.track(number, (err, items, failures) => {
       t.error(err)
@@ -34,7 +34,7 @@ test('Found', (t) => {
   })
 
   t.test('ignore duplicate tracking numbers', (t) => {
-    var number = 'SS123456789BR'
+    const number = 'SS123456789BR'
     t.plan(4)
     sro.track(number, number, (err, items, failures) => {
       t.error(err)
@@ -46,7 +46,7 @@ test('Found', (t) => {
   })
 
   t.test('make multiple API requests in batch', (t) => {
-    var numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR']
+    const numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR', 'SS423456789BR']
     t.plan(4)
     sro.track(numbers, (err, items, failures) => {
       t.error(err)
@@ -58,7 +58,7 @@ test('Found', (t) => {
   })
 
   t.test('allow progress reporting', (t) => {
-    var numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR']
+    const numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR']
     const onProgress = sinon.spy((progress, item) => {
       t.ok(progress >= 0 && progress <= 1)
       t.ok(numbers.includes(item.number()))
@@ -75,11 +75,11 @@ test('Found', (t) => {
 })
 
 test('Not found', (t) => {
-  t.beforeEach(stubRequest.bind(null, 'not-found'))
-  t.afterEach(restoreRequest)
+  t.beforeEach(() => stubRequest('not-found'))
+  t.afterEach(() => restoreRequest())
 
   t.test('handle an item not found', (t) => {
-    var number = 'SS123456789BR'
+    const number = 'SS123456789BR'
     t.plan(4)
     sro.track(number, (err, items, failures) => {
       t.error(err)

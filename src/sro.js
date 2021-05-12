@@ -1,5 +1,5 @@
-import track from './utils/track'
-import validate from './utils/validate'
-import formatters from './formatters'
+import track from './utils/track.js'
+import validate from './utils/validate.js'
+import * as formatters from './formatters/index.js'
 
-export default { track, validate, formatters }
+export { track, validate, formatters }

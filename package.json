@@ -1,6 +1,6 @@
 {
   "name": "sro",
-  "version": "0.1.6",
+  "version": "0.0.0-development",
   "description": "Friendly Correios SRO API wrapper and command-line utility",
   "author": "Rafael Bardini",
   "homepage": "https://github.com/rbardini/sro",
@@ -15,14 +15,22 @@
     "shipping",
     "brazil"
   ],
-  "main": "index.js",
-  "scripts": {
-    "build": "babel src/ -d lib/",
-    "watch": "npm run build -- --watch",
-    "lint": "standard | snazzy",
-    "test": "tap test/*.js"
+  "exports": "./index.js",
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
-  "bin": "./bin/sro",
+  "scripts": {
+    "lint": "standard | snazzy",
+    "test": "tap --node-arg=--experimental-loader=@istanbuljs/esm-loader-hook --no-check-coverage"
+  },
+  "files": [
+    "bin/*",
+    "data/*",
+    "src/*",
+    "index.js"
+  ],
+  "bin": "./bin/sro.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rbardini/sro"
@@ -32,24 +40,21 @@
   },
   "license": "MIT",
   "dependencies": {
-    "async": "3.2.0",
-    "chalk": "4.1.0",
-    "cli-table": "0.3.1",
-    "commander": "6.0.0",
-    "country-data": "0.0.31",
-    "lodash": "4.17.20",
-    "moment": "2.27.0",
-    "request": "2.88.2",
-    "xml2js": "0.4.23"
+    "async": "^3.2.0",
+    "chalk": "^4.1.1",
+    "cli-table": "^0.3.6",
+    "commander": "^7.2.0",
+    "country-data": "^0.0.31",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "request": "^2.88.2",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.5",
-    "@babel/core": "7.11.4",
-    "@babel/preset-env": "7.11.0",
-    "babel-plugin-add-module-exports": "1.0.2",
-    "sinon": "9.0.3",
-    "snazzy": "8.0.0",
-    "standard": "14.3.4",
-    "tap": "14.10.8"
+    "@istanbuljs/esm-loader-hook": "0.1.2",
+    "sinon": "10.0.0",
+    "snazzy": "9.0.0",
+    "standard": "16.0.3",
+    "tap": "15.0.9"
   }
 }

@@ -1,3 +1,4 @@
 {
+  "preset": "conventionalcommits",
   "tagFormat": "${version}"
 }

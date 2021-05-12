@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import Model from './model'
+import Model from './model.js'
 
 class Event extends Model {
   constructor (...args) {
@@ -17,7 +17,7 @@ class Event extends Model {
   }
 
   _normalize () {
-    var descricao = this.get('descricao')
+    const descricao = this.get('descricao')
 
     if (_.isPlainObject(descricao)) {
       // The 'descricao' field sometimes contains unclosed tags,
@@ -27,11 +27,11 @@ class Event extends Model {
   }
 
   _createDate () {
-    var data = this.get('data').split('/')
-    var hora = this.get('hora').split(':')
+    const data = this.get('data').split('/')
+    const hora = this.get('hora').split(':')
 
-    var [day, month, year] = data
-    var [hour, minute] = hora
+    const [day, month, year] = data
+    const [hour, minute] = hora
 
     return new Date(year, month - 1, day, hour, minute)
   }

@@ -1,21 +1,14 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import request from 'request'
 import sinon from 'sinon'
 
-const stubRequest = (type, callback) => {
-  var file = `${__dirname}/data/${type}.xml`
+const stubRequest = (type) => {
+  const file = new URL(`data/${type}.xml`, import.meta.url)
+  const data = fs.readFileSync(file)
 
-  fs.readFile(file, (err, data) => {
-    if (err) return callback(err)
-
-    var stub = sinon.stub(request, 'post').yields(null, null, data)
-    if (callback) callback(null, stub)
-  })
+  return sinon.stub(request, 'post').yields(null, null, data)
 }
 
-const restoreRequest = (callback) => {
-  request.post.restore()
-  if (callback) callback()
-}
+const restoreRequest = () => request.post.restore()
 
 export { stubRequest, restoreRequest }

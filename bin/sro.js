@@ -1,8 +1,11 @@
 #!/usr/bin/env node
-var version = require('../package.json').version
-var program = require('commander')
-var sro = require('../')
-var formatters = sro.formatters
+import fs from 'node:fs'
+import program from 'commander'
+import { formatters, track } from '../index.js'
+
+const { version } = JSON.parse(
+  fs.readFileSync(new URL('../package.json', import.meta.url))
+)
 
 program
   .version(version)
@@ -11,21 +14,21 @@ program
   .option('-c, --check', 'check tracking number check digit', false)
   .parse(process.argv)
 
-var numbers = program.args
-var formatter = formatters[program.output.trim().toLowerCase()] || formatters.table
-var options = {
-  checkDigit: program.check,
+const numbers = program.args
+const formatter = formatters[program.opts().output.trim().toLowerCase()] || formatters.table
+const options = {
+  checkDigit: program.opts().check,
   onProgress: function printItem (progress, item) {
     console.log(formatter.format([item]))
   }
 }
-var callback = function printFailures (err, items, failures) {
+const callback = function printFailures (err, items, failures) {
   if (err) throw err
   console.log(formatter.format(null, failures))
 }
 
 if (numbers.length) {
-  sro.track(numbers, options, callback)
+  track(numbers, options, callback)
 } else {
   program.help()
 }
