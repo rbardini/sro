@@ -43,7 +43,7 @@
     "async": "^3.2.0",
     "chalk": "^4.1.1",
     "cli-table": "^0.3.6",
-    "commander": "^7.2.0",
+    "commander": "^8.2.0",
     "country-data": "^0.0.31",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -52,9 +52,9 @@
   },
   "devDependencies": {
     "@istanbuljs/esm-loader-hook": "0.1.2",
-    "sinon": "10.0.0",
+    "sinon": "11.1.2",
     "snazzy": "9.0.0",
-    "standard": "16.0.3",
-    "tap": "15.0.9"
+    "standard": "16.0.4",
+    "tap": "15.0.10"
   }
 }
