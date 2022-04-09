@@ -46,7 +46,6 @@
     "commander": "^8.2.0",
     "country-data": "^0.0.31",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
     "request": "^2.88.2",
     "xml2js": "^0.4.23"
   },

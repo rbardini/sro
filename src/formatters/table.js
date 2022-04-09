@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import moment from 'moment'
 import chalk from 'chalk'
 import Table from 'cli-table'
 
@@ -14,7 +13,7 @@ const TableFormatter = {
       })
 
       item.events().forEach((event) => {
-        const data = moment(event.date()).format('lll')
+        const data = event.date().toLocaleString()
         let local = `${event.get('local')} - ${event.get('cidade')}/${event.get('uf')}`
         const descricao = event.get('descricao')
         const destino = event.get('destino')
