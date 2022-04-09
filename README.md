@@ -1,10 +1,9 @@
-SRO
-===
+# SRO
 
 [![npm package version](https://img.shields.io/npm/v/sro.svg)](https://www.npmjs.com/package/sro)
 [![Build status](https://img.shields.io/github/workflow/status/rbardini/sro/Main)](https://github.com/rbardini/sro/actions)
 [![Code coverage](https://img.shields.io/codecov/c/github/rbardini/sro.svg)](https://codecov.io/gh/rbardini/sro)
-[![Dependency status](https://img.shields.io/david/rbardini/sro.svg)](https://david-dm.org/rbardini/sro)
+[![Dependencies status](https://img.shields.io/librariesio/release/npm/sro)](https://libraries.io/npm/sro)
 [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Friendly Correios SRO API wrapper and command-line utility.
@@ -60,7 +59,7 @@ Tracks a collection of tracking numbers.
 - `numbers` (String|Array) - Tracking number or array of tracking numbers to be tracked.
 - `options` (Object) - Optional tracking options:
   - `checkDigit` (Boolean) - Whether to validate the tracking number check digit
-  -  `onProgress(progress, item)` (Function) - Callback function called for each number once its data has been retrieved. `progress` is a float number between 0 and 1. `item` is the [Item](#item) object. Invalid tracking numbers are filtered before any requests are made, so they will not be passed here.
+  - `onProgress(progress, item)` (Function) - Callback function called for each number once its data has been retrieved. `progress` is a float number between 0 and 1. `item` is the [Item](#item) object. Invalid tracking numbers are filtered before any requests are made, so they will not be passed here.
 - `callback(err, items, failures)` (Function) - Callback function called once all tracking numbers have been processed, or when an error occurs. `items` is an array of [Item](#item) objects. `failures` is an array of objects containing the tracking numbers that did not pass validation.
 
 #### validate(number [, options], callback)
