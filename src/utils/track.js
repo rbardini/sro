@@ -39,7 +39,7 @@ const track = (numbers, options = {}, callback = () => {}) => {
       .map(number => new Item(number, objetos.find(({ numero }) => numero === number)))
       .forEach(item => {
         items.push(item)
-        options.onProgress?.(++tracked / count, item)
+        if (options.onProgress) options.onProgress(++tracked / count, item)
       })
   }))
     .then(() => callback(null, items, failures))
