@@ -18,13 +18,11 @@ const numbers = program.args
 const formatter = formatters[program.opts().output.trim().toLowerCase()] || formatters.table
 const options = {
   checkDigit: program.opts().check,
-  onProgress: function printItem (progress, item) {
-    console.log(formatter.format([item]))
-  }
+  onProgress: (progress, item) => console.log(formatter.format([item]))
 }
-const callback = function printFailures (err, items, failures) {
+const callback = (err, items, failures) => {
   if (err) throw err
-  console.log(formatter.format(null, failures))
+  console.log(formatter.format(undefined, failures))
 }
 
 if (numbers.length) {

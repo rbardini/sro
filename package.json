@@ -40,18 +40,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "async": "^3.2.0",
     "chalk": "^5.0.0",
     "cli-table": "^0.3.6",
     "commander": "^9.0.0",
     "country-data": "^0.0.31",
-    "lodash": "^4.17.21",
-    "request": "^2.88.2",
+    "node-fetch": "^3.0.0",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "c8": "7.11.2",
-    "sinon": "14.0.0",
+    "nock": "13.2.4",
     "snazzy": "9.0.0",
     "standard": "17.0.0",
     "tap": "16.2.0"

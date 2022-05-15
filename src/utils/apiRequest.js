@@ -1,12 +1,13 @@
-import _ from 'lodash'
-import request from 'request'
+import fetch from 'node-fetch'
+import xml2js from 'xml2js'
 
-const REQUEST_URL = 'http://webservice.correios.com.br/service/rastro'
-const REQUEST_HEADERS = {
+export const REQUEST_HOST = 'http://webservice.correios.com.br'
+export const REQUEST_PATH = '/service/rastro'
+export const REQUEST_HEADERS = {
   'Content-Type': 'text/xml; charset=utf-8',
   SOAPAction: 'http://resource.webservice.correios.com.br/buscaEventos'
 }
-const DEFAULT_OPTIONS = { usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T', lingua: '101' }
+export const DEFAULT_OPTIONS = { usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T', lingua: '101' }
 
 const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) => (
   `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/">
@@ -23,14 +24,25 @@ const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) => 
   </soap:Envelope>`
 )
 
-const apiRequest = (options, callback) => {
-  options = _.defaults({}, options, DEFAULT_OPTIONS)
-
-  return request.post({
-    url: REQUEST_URL,
+const apiRequest = async (options) => {
+  const response = await fetch([REQUEST_HOST, REQUEST_PATH].join(''), {
+    method: 'POST',
     headers: REQUEST_HEADERS,
-    body: buildEnvelope(options)
-  }, callback)
+    body: buildEnvelope({ ...DEFAULT_OPTIONS, ...options })
+  })
+  const xmlStr = await response.text()
+  const json = await xml2js.parseStringPromise(xmlStr, {
+    async: true,
+    explicitArray: false,
+    explicitRoot: false,
+    ignoreAttrs: true,
+    normalize: true,
+    normalizeTags: true,
+    trim: true,
+    tagNameProcessors: [name => name.substr(name.indexOf(':') + 1)]
+  })
+
+  return json.body.buscaeventoslistaresponse.return
 }
 
 export default apiRequest

@@ -1,12 +1,12 @@
-import request from 'request'
-import sinon from 'sinon'
 import { test } from 'tap'
 import * as sro from '../index.js'
-import { stubRequest, restoreRequest } from './fixtures/index.js'
+import { mockRequests, restoreRequests } from './fixtures/index.js'
 
 test('Found', (t) => {
-  t.beforeEach(() => stubRequest('found'))
-  t.afterEach(() => restoreRequest())
+  let scope
+
+  t.beforeEach(() => (scope = mockRequests('found')))
+  t.afterEach(() => restoreRequests())
 
   t.test('filter out invalid tracking numbers', (t) => {
     const numbers = ['SSS12345678BR', 'SS123456789BR', 'SS12345678BRA']
@@ -52,21 +52,20 @@ test('Found', (t) => {
       t.error(err)
       t.equal(items.length, 4)
       t.equal(failures.length, 0)
-      t.equal(request.post.callCount, 1)
+      t.equal(scope.isDone(), true)
       t.end()
     })
   })
 
   t.test('allow progress reporting', (t) => {
     const numbers = ['SS123456789BR', 'SS223456789BR', 'SS323456789BR']
-    const onProgress = sinon.spy((progress, item) => {
+    const onProgress = (progress, item) => {
       t.ok(progress >= 0 && progress <= 1)
       t.ok(numbers.includes(item.number()))
-    })
-    t.plan(8)
+    }
+    t.plan(7)
     sro.track(numbers, { onProgress }, (err, items, failures) => {
       t.error(err)
-      t.equal(onProgress.callCount, 3)
       t.end()
     })
   })
@@ -75,8 +74,8 @@ test('Found', (t) => {
 })
 
 test('Not found', (t) => {
-  t.beforeEach(() => stubRequest('not-found'))
-  t.afterEach(() => restoreRequest())
+  t.beforeEach(() => mockRequests('not-found'))
+  t.afterEach(() => restoreRequests())
 
   t.test('handle an item not found', (t) => {
     const number = 'SS123456789BR'

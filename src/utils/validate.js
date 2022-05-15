@@ -1,25 +1,20 @@
-import _ from 'lodash'
-
 import normalize from './normalize.js'
 import checkDigit from './checkDigit.js'
 
-const validate = (numbers, options, callback) => {
-  options = options || {}
-  callback = callback || _.noop
-
-  if (_.isFunction(options)) {
+const validate = (numbers, options = {}, callback = () => {}) => {
+  if (typeof options === 'function') {
     callback = options
     options = {}
   }
 
-  if (!_.isArray(numbers)) {
+  if (!Array.isArray(numbers)) {
     numbers = [numbers]
   }
 
   const passes = []
   const failures = []
 
-  _.forEach(numbers, number => {
+  numbers.forEach(number => {
     const result = { numero: number }
 
     if (number == null) {
@@ -27,7 +22,7 @@ const validate = (numbers, options, callback) => {
       return failures.push(result)
     }
 
-    if (!_.isString(number)) {
+    if (typeof number !== 'string') {
       result.error = 'Tracking number is not a string'
       return failures.push(result)
     }

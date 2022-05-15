@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 class Model {
   constructor (attributes = {}) {
     this._attributes = attributes
@@ -22,19 +20,20 @@ class Model {
   }
 
   forEach (iteratee) {
-    return _.forEach(this._attributes, iteratee)
+    return Object.entries(this._attributes)
+      .forEach(([key, value]) => iteratee(value, key, this._attributes))
   }
 
   compact () {
     this.forEach((value, name) => {
-      if (_.isString(value) && _.isEmpty(value.trim())) {
+      if (typeof value === 'string' && value.trim() === '') {
         this.unset(name)
       }
     })
   }
 
   toJSON () {
-    return _.clone(this._attributes)
+    return JSON.parse(JSON.stringify(this._attributes))
   }
 }
 

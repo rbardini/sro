@@ -1,12 +1,11 @@
-import _ from 'lodash'
 import chalk from 'chalk'
 import Table from 'cli-table'
 
 const SYMBOLS = { pass: '✓', fail: '✖' }
 
 const TableFormatter = {
-  format: (items, failures) => {
-    const formattedItems = _.reduce(items, (result, item) => {
+  format: (items = [], failures = []) => {
+    const formattedItems = items.reduce((result, item) => {
       const header = '\n ' + chalk.bold(item.get('numero')) + '\n ' + item.countryName() + ' via ' + item.service()
       const table = new Table({
         head: ['Data', 'Local', 'Situação']
@@ -28,7 +27,7 @@ const TableFormatter = {
       return `${result}${header}\n${table.toString()}\n`
     }, '')
 
-    const formattedFailures = _.reduce(failures, (result, failure) => (
+    const formattedFailures = failures.reduce((result, failure) => (
       `${result}\n ${chalk.bold(failure.numero)}\n ${chalk.red(`${SYMBOLS.fail} ${failure.error}\n`)}`
     ), '')
 

@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import Model from './model.js'
 
 class Event extends Model {
@@ -19,7 +17,7 @@ class Event extends Model {
   _normalize () {
     const descricao = this.get('descricao')
 
-    if (_.isPlainObject(descricao)) {
+    if (typeof descricao === 'object') {
       // The 'descricao' field sometimes contains unclosed tags,
       // so replace it by its character content
       this.set('descricao', descricao._ || '')
