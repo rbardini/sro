@@ -1,3 +1,0 @@
-{
-  "reporter": ["lcovonly", "text", "text-summary"]
-}
