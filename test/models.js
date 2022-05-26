@@ -19,47 +19,27 @@ test('Item', (t) => {
   })
 
   t.test('have a number', (t) => {
-    t.equal(item.number(), number)
+    t.equal(item.numero, number)
     t.end()
   })
 
-  t.test('have a service code', (t) => {
-    t.equal(item.serviceCode(), 'TE')
+  t.test('have an acronym', (t) => {
+    t.equal(item.sigla, 'TE')
     t.end()
   })
 
-  t.test('have a service', (t) => {
-    t.equal(item.service(), 'TESTE (OBJETO PARA TREINAMENTO)')
-    t.end()
-  })
-
-  t.test('have a country code', (t) => {
-    t.equal(item.countryCode(), 'BR')
-    t.end()
-  })
-
-  t.test('have a country name', (t) => {
-    t.equal(item.countryName(), 'Brazil')
+  t.test('have a name', (t) => {
+    t.equal(item.nome, 'TESTE (OBJETO PARA TREINAMENTO)')
     t.end()
   })
 
   t.test('have a country', (t) => {
-    t.ok(item.country())
+    t.equal(item.pais, 'BRASIL')
     t.end()
   })
 
   t.test('have events', (t) => {
-    t.equal(item.events().length, 31)
-    t.end()
-  })
-
-  t.test('have a status', (t) => {
-    t.ok(item.status())
-    t.end()
-  })
-
-  t.test('be found', (t) => {
-    t.equal(item.found(), true)
+    t.equal(item.eventos.length, 31)
     t.end()
   })
 
@@ -70,13 +50,17 @@ test('Event', (t) => {
   let event = null
 
   t.test('setup', (t) => {
-    event = item.status()
+    [event] = item.eventos
     t.end()
   })
 
   t.test('have a date', (t) => {
-    t.ok(event)
-    t.ok(event.date() instanceof Date)
+    t.equal(event.data, '2016-07-04T17:46')
+    t.end()
+  })
+
+  t.test('have a description', (t) => {
+    t.equal(event.descricao, 'Saída para entrega cancelada')
     t.end()
   })
 

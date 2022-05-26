@@ -1,4 +1,4 @@
-import normalize from './normalize.js'
+import normalizeNumber from './normalizeNumber.js'
 import checkDigit from './checkDigit.js'
 
 const validate = (numbers, options = {}, callback = () => {}) => {
@@ -27,7 +27,7 @@ const validate = (numbers, options = {}, callback = () => {}) => {
       return failures.push(result)
     }
 
-    const normalizedNumber = normalize(number)
+    const normalizedNumber = normalizeNumber(number)
 
     if (normalizedNumber.length === 0) {
       result.error = 'Tracking number is empty'

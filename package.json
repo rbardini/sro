@@ -18,7 +18,7 @@
   "exports": "./index.js",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=14.16"
   },
   "scripts": {
     "lint": "standard | snazzy",
@@ -26,7 +26,6 @@
   },
   "files": [
     "bin/*",
-    "data/*",
     "src/*",
     "index.js"
   ],
@@ -43,7 +42,6 @@
     "chalk": "^5.0.0",
     "cli-table": "^0.3.6",
     "commander": "^9.0.0",
-    "country-data": "^0.0.31",
     "node-fetch": "^3.0.0",
     "xml2js": "^0.4.23"
   },

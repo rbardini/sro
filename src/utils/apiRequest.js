@@ -33,6 +33,7 @@ const apiRequest = async (options) => {
   const xmlStr = await response.text()
   const json = await xml2js.parseStringPromise(xmlStr, {
     async: true,
+    emptyTag: null,
     explicitArray: false,
     explicitRoot: false,
     ignoreAttrs: true,

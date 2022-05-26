@@ -1,5 +1,5 @@
-import { Item } from '../models/index.js'
-import normalize from './normalize.js'
+import normalizeItem from './normalizeItem.js'
+import normalizeNumber from './normalizeNumber.js'
 import validate from './validate.js'
 import apiRequest from './apiRequest.js'
 
@@ -16,13 +16,12 @@ const track = (numbers, options = {}, callback = () => {}) => {
   const items = []
   const failures = []
 
-  numbers = [...new Set(numbers
+  numbers = numbers
     .filter(number => validate(number, options, (err, pass, failure) => {
       if (err) throw err
       if (!pass.length) failures.push(failure[0])
     }))
-    .map(normalize)
-  )]
+    .map(normalizeNumber)
 
   let tracked = 0
   const count = numbers.length
@@ -36,7 +35,7 @@ const track = (numbers, options = {}, callback = () => {}) => {
     const objetos = [response.objeto].flat().filter(Boolean)
 
     chunk
-      .map(number => new Item(number, objetos.find(({ numero }) => numero === number)))
+      .map(number => normalizeItem(objetos.find(({ numero }) => numero === number)))
       .forEach(item => {
         items.push(item)
         if (options.onProgress) options.onProgress(++tracked / count, item)
