@@ -34,6 +34,7 @@
   "scripts": {
     "format": "prettier --ignore-path .gitignore .",
     "lint": "standard | snazzy",
+    "prepare": "husky install",
     "test": "c8 tap --node-arg=--experimental-json-modules --no-coverage"
   },
   "dependencies": {
@@ -45,6 +46,8 @@
   },
   "devDependencies": {
     "c8": "7.11.3",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.0",
     "nock": "13.2.4",
     "prettier": "2.6.2",
     "prettier-plugin-packagejson": "2.2.18",
