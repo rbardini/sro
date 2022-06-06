@@ -17,10 +17,12 @@ const track = (numbers, options = {}, callback = () => {}) => {
   const failures = []
 
   numbers = numbers
-    .filter(number => validate(number, options, (err, pass, failure) => {
-      if (err) throw err
-      if (!pass.length) failures.push(failure[0])
-    }))
+    .filter(number =>
+      validate(number, options, (err, pass, failure) => {
+        if (err) throw err
+        if (!pass.length) failures.push(failure[0])
+      })
+    )
     .map(normalizeNumber)
 
   let tracked = 0
@@ -30,17 +32,21 @@ const track = (numbers, options = {}, callback = () => {}) => {
     return acc[acc.length - 1].push(number) && acc
   }, [])
 
-  Promise.all(chunks.map(async (chunk) => {
-    const response = await apiRequest({ objetos: chunk })
-    const objetos = [response.objeto].flat().filter(Boolean)
+  Promise.all(
+    chunks.map(async chunk => {
+      const response = await apiRequest({ objetos: chunk })
+      const objetos = [response.objeto].flat().filter(Boolean)
 
-    chunk
-      .map(number => normalizeItem(objetos.find(({ numero }) => numero === number)))
-      .forEach(item => {
-        items.push(item)
-        if (options.onProgress) options.onProgress(++tracked / count, item)
-      })
-  }))
+      chunk
+        .map(number =>
+          normalizeItem(objetos.find(({ numero }) => numero === number))
+        )
+        .forEach(item => {
+          items.push(item)
+          if (options.onProgress) options.onProgress(++tracked / count, item)
+        })
+    })
+  )
     .then(() => callback(null, items, failures))
     .catch(err => callback(err))
 }

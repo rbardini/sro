@@ -10,12 +10,17 @@ const { version } = JSON.parse(
 program
   .version(version)
   .usage('[options] <numbers...>')
-  .option('-o, --output <format>', 'specify the output format (table|json|pretty) [table]', 'table')
+  .option(
+    '-o, --output <format>',
+    'specify the output format (table|json|pretty) [table]',
+    'table'
+  )
   .option('-c, --check', 'check tracking number check digit', false)
   .parse(process.argv)
 
 const numbers = program.args
-const formatter = formatters[program.opts().output.trim().toLowerCase()] || formatters.table
+const formatter =
+  formatters[program.opts().output.trim().toLowerCase()] || formatters.table
 const options = {
   checkDigit: program.opts().check,
   onProgress: (progress, item) => console.log(formatter.format([item]))

@@ -7,9 +7,15 @@ export const REQUEST_HEADERS = {
   'Content-Type': 'text/xml; charset=utf-8',
   SOAPAction: 'http://resource.webservice.correios.com.br/buscaEventos'
 }
-export const DEFAULT_OPTIONS = { usuario: 'ECT', senha: 'SRO', tipo: 'L', resultado: 'T', lingua: '101' }
+export const DEFAULT_OPTIONS = {
+  usuario: 'ECT',
+  senha: 'SRO',
+  tipo: 'L',
+  resultado: 'T',
+  lingua: '101'
+}
 
-const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) => (
+const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) =>
   `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/">
     <soap:Body>
       <res:buscaEventosLista>
@@ -18,13 +24,15 @@ const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) => 
         <tipo>${tipo}</tipo>
         <resultado>${resultado}</resultado>
         <lingua>${lingua}</lingua>
-        ${objetos.reduce((result, objeto) => `${result}<objetos>${objeto}</objetos>`, '')}
+        ${objetos.reduce(
+          (result, objeto) => `${result}<objetos>${objeto}</objetos>`,
+          ''
+        )}
       </res:buscaEventosLista>
     </soap:Body>
   </soap:Envelope>`
-)
 
-const apiRequest = async (options) => {
+const apiRequest = async options => {
   const response = await fetch([REQUEST_HOST, REQUEST_PATH].join(''), {
     method: 'POST',
     headers: REQUEST_HEADERS,

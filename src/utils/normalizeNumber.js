@@ -1,3 +1,3 @@
-const normalizeNumber = (number) => number.trim().toUpperCase()
+const normalizeNumber = number => number.trim().toUpperCase()
 
 export default normalizeNumber

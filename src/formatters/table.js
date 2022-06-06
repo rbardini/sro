@@ -6,12 +6,18 @@ const SYMBOLS = { pass: '✓', fail: '✖' }
 const TableFormatter = {
   format: (items = [], failures = []) => {
     const formattedItems = items.reduce((result, item) => {
-      const header = '\n ' + chalk.bold(item.numero) + '\n ' + item.pais + ' via ' + item.nome
+      const header =
+        '\n ' +
+        chalk.bold(item.numero) +
+        '\n ' +
+        item.pais +
+        ' via ' +
+        item.nome
       const table = new Table({
         head: ['Data', 'Local', 'Situação']
       })
 
-      item.eventos.forEach((event) => {
+      item.eventos.forEach(event => {
         const data = event.data.toLocaleString()
         const city = [event.cidade, event.uf].filter(Boolean).join('/')
         let local = [event.local, city].filter(Boolean).join(' - ')
@@ -28,9 +34,13 @@ const TableFormatter = {
       return `${result}${header}\n${table.toString()}\n`
     }, '')
 
-    const formattedFailures = failures.reduce((result, failure) => (
-      `${result}\n ${chalk.bold(failure.numero)}\n ${chalk.red(`${SYMBOLS.fail} ${failure.error}\n`)}`
-    ), '')
+    const formattedFailures = failures.reduce(
+      (result, failure) =>
+        `${result}\n ${chalk.bold(failure.numero)}\n ${chalk.red(
+          `${SYMBOLS.fail} ${failure.error}\n`
+        )}`,
+      ''
+    )
 
     return formattedItems + formattedFailures
   }

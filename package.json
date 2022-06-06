@@ -2,8 +2,6 @@
   "name": "sro",
   "version": "0.0.0-development",
   "description": "Friendly Correios SRO API wrapper and command-line utility",
-  "author": "Rafael Bardini",
-  "homepage": "https://github.com/rbardini/sro",
   "keywords": [
     "correios",
     "ect",
@@ -15,29 +13,29 @@
     "shipping",
     "brazil"
   ],
-  "exports": "./index.js",
+  "homepage": "https://github.com/rbardini/sro",
+  "bugs": {
+    "url": "https://github.com/rbardini/sro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rbardini/sro"
+  },
+  "license": "MIT",
+  "author": "Rafael Bardini",
   "type": "module",
-  "engines": {
-    "node": ">=14.16"
-  },
-  "scripts": {
-    "lint": "standard | snazzy",
-    "test": "c8 tap --node-arg=--experimental-json-modules --no-coverage"
-  },
+  "exports": "./index.js",
+  "bin": "./bin/sro.js",
   "files": [
     "bin/*",
     "src/*",
     "index.js"
   ],
-  "bin": "./bin/sro.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rbardini/sro"
+  "scripts": {
+    "format": "prettier --ignore-path .gitignore .",
+    "lint": "standard | snazzy",
+    "test": "c8 tap --node-arg=--experimental-json-modules --no-coverage"
   },
-  "bugs": {
-    "url": "https://github.com/rbardini/sro/issues"
-  },
-  "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.0",
     "cli-table": "^0.3.6",
@@ -48,8 +46,13 @@
   "devDependencies": {
     "c8": "7.11.3",
     "nock": "13.2.4",
+    "prettier": "2.6.2",
+    "prettier-plugin-packagejson": "2.2.18",
     "snazzy": "9.0.0",
     "standard": "17.0.0",
     "tap": "16.2.0"
+  },
+  "engines": {
+    "node": ">=14.16"
   }
 }
