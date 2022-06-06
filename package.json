@@ -48,7 +48,7 @@
     "c8": "7.11.3",
     "husky": "8.0.1",
     "lint-staged": "13.0.0",
-    "nock": "13.2.4",
+    "nock": "13.2.6",
     "prettier": "2.6.2",
     "prettier-plugin-packagejson": "2.2.18",
     "snazzy": "9.0.0",
