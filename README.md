@@ -47,7 +47,7 @@ Options:
 
 ## API
 
-### `track(numbers [, options], callback)`
+### `track(numbers, options?): Promise<[items, failures]>`
 
 Tracks a collection of tracking numbers.
 
@@ -57,9 +57,15 @@ Tracks a collection of tracking numbers.
 - `options` (Object) - Optional tracking options:
   - `checkDigit` (Boolean) - Whether to validate the tracking number check digit
   - `onProgress(progress, item)` (Function) - Callback function called for each number once its data has been retrieved. `progress` is a float number between 0 and 1. `item` is the item object. Invalid tracking numbers are filtered before any requests are made, so they will not be passed here.
-- `callback(err, items, failures)` (Function) - Callback function called once all tracking numbers have been processed, or when an error occurs. `items` is an array of item objects. `failures` is an array of objects containing the tracking numbers that did not pass validation.
 
-### `validate(number [, options], callback)`
+#### Return
+
+`[items, failures]` (Array)
+
+- `items` (Array) - Item objects.
+- `failures` (Array) - Objects containing the tracking numbers that did not pass validation.
+
+### `validate(number, options?): [passes, failures]`
 
 Validates a collection of tracking numbers.
 
@@ -68,8 +74,10 @@ Validates a collection of tracking numbers.
 - `numbers` (String|Array) - Tracking number or array of tracking numbers to be validated
 - `options` (Object) - Optional tracking options:
   - `checkDigit` (Boolean) - Whether to validate the tracking number check digit
-- `callback(err, passes, failures)` (Function) - Callback function called once all numbers have been processed, or when an error occurs. `passes` is an array of objects containing the tracking numbers that passed validation. `failures` is an array of objects containing the tracking numbers that did not pass validation.
 
 #### Return
 
-True if all tracking numbers are valid, false otherwise.
+`[passes, failures]` (Array)
+
+- `passes` (Array) - Objects containing the tracking numbers that passed validation.
+- `failures` (Array) - Objects containing the tracking numbers that did not pass validation.

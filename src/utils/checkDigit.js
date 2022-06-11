@@ -1,6 +1,6 @@
 const WEIGHTS = [8, 6, 4, 2, 3, 5, 9, 7]
 
-const checkDigit = number => {
+export default number => {
   const sum = WEIGHTS.reduce(
     (sum, weight, i) => sum + number.charCodeAt(i + 2) * weight,
     0
@@ -11,5 +11,3 @@ const checkDigit = number => {
 
   return dv === +number.charAt(10)
 }
-
-export default checkDigit

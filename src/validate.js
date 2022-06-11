@@ -1,12 +1,7 @@
-import normalizeNumber from './normalizeNumber.js'
-import checkDigit from './checkDigit.js'
+import checkDigit from './utils/checkDigit.js'
+import normalizeNumber from './utils/normalizeNumber.js'
 
-const validate = (numbers, options = {}, callback = () => {}) => {
-  if (typeof options === 'function') {
-    callback = options
-    options = {}
-  }
-
+export default (numbers, options = {}) => {
   if (!Array.isArray(numbers)) {
     numbers = [numbers]
   }
@@ -52,8 +47,5 @@ const validate = (numbers, options = {}, callback = () => {}) => {
     passes.push(result)
   })
 
-  callback(null, passes, failures)
-  return failures.length === 0
+  return [passes, failures]
 }
-
-export default validate

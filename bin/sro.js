@@ -23,15 +23,12 @@ const formatter =
   formatters[program.opts().output.trim().toLowerCase()] || formatters.table
 const options = {
   checkDigit: program.opts().check,
-  onProgress: (progress, item) => console.log(formatter.format([item]))
-}
-const callback = (err, items, failures) => {
-  if (err) throw err
-  console.log(formatter.format(undefined, failures))
+  onProgress: (_progress, item) => console.log(formatter([item]))
 }
 
 if (numbers.length) {
-  track(numbers, options, callback)
+  const [, failures] = await track(numbers, options)
+  console.log(formatter(undefined, failures))
 } else {
   program.help()
 }

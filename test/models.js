@@ -6,16 +6,11 @@ const number = 'TE123456789BR'
 let item = null
 
 test('Item', t => {
-  t.test('setup', t => {
+  t.before(async () => {
     mockRequests('found')
-
-    sro.track(number, (err, items) => {
-      restoreRequests()
-
-      if (err) return t.bailout(err)
-      item = items[0]
-      t.end()
-    })
+    const [items] = await sro.track(number)
+    item = items[0]
+    restoreRequests()
   })
 
   t.test('have a number', t => {
@@ -49,10 +44,7 @@ test('Item', t => {
 test('Event', t => {
   let event = null
 
-  t.test('setup', t => {
-    ;[event] = item.eventos
-    t.end()
-  })
+  t.before(() => ([event] = item.eventos))
 
   t.test('have a date', t => {
     t.equal(event.data, '2016-07-04T17:46')

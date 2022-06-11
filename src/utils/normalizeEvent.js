@@ -1,4 +1,4 @@
-const normalizeEvent = ({ data, descricao, hora, ...restEvent }) => {
+export default ({ data, descricao, hora, ...restEvent }) => {
   const [day, month, year] = data.split('/')
   const [hour, minute] = hora.split(':')
 
@@ -10,5 +10,3 @@ const normalizeEvent = ({ data, descricao, hora, ...restEvent }) => {
     ...restEvent
   }
 }
-
-export default normalizeEvent

@@ -24,15 +24,12 @@ const buildEnvelope = ({ usuario, senha, tipo, resultado, lingua, objetos }) =>
         <tipo>${tipo}</tipo>
         <resultado>${resultado}</resultado>
         <lingua>${lingua}</lingua>
-        ${objetos.reduce(
-          (result, objeto) => `${result}<objetos>${objeto}</objetos>`,
-          ''
-        )}
+        ${objetos.map(objeto => `<objetos>${objeto}</objetos>`).join('')}
       </res:buscaEventosLista>
     </soap:Body>
   </soap:Envelope>`
 
-const apiRequest = async options => {
+export default async options => {
   const response = await fetch([REQUEST_HOST, REQUEST_PATH].join(''), {
     method: 'POST',
     headers: REQUEST_HEADERS,
@@ -53,5 +50,3 @@ const apiRequest = async options => {
 
   return json.body.buscaeventoslistaresponse.return
 }
-
-export default apiRequest
