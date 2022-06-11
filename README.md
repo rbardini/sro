@@ -22,14 +22,12 @@
 ## Usage
 
 ```js
-import * as sro from 'sro'
+import { track } from 'sro'
 
-sro.track('TE123456789BR', (err, items, failures) => {
-  if (err) throw err
+const [items, failures] = await track('TE123456789BR')
 
-  items.forEach(item => console.log(item.eventos[0]?.descricao))
-  failures.forEach(failure => console.log(failure.error))
-})
+items.forEach(item => console.log(item.eventos[0]?.descricao))
+failures.forEach(failure => console.log(failure.error))
 ```
 
 If installed globally using the npm `-g` flag, SRO can also be invoked from the command-line:
