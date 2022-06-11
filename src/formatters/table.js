@@ -18,7 +18,7 @@ const TableFormatter = {
       })
 
       item.eventos.forEach(event => {
-        const data = event.data.toLocaleString()
+        const data = new Date(event.data).toLocaleString()
         const city = [event.cidade, event.uf].filter(Boolean).join('/')
         let local = [event.local, city].filter(Boolean).join(' - ')
         const descricao = event.descricao
