@@ -45,15 +45,15 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "c8": "7.11.3",
+    "c8": "7.12.0",
     "husky": "8.0.1",
-    "lint-staged": "13.0.1",
-    "nock": "13.2.6",
-    "prettier": "2.6.2",
+    "lint-staged": "13.0.3",
+    "nock": "13.2.9",
+    "prettier": "2.7.1",
     "prettier-plugin-packagejson": "2.2.18",
     "snazzy": "9.0.0",
     "standard": "17.0.0",
-    "tap": "16.2.0"
+    "tap": "16.3.0"
   },
   "engines": {
     "node": ">=14.16"
