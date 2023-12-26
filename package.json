@@ -32,10 +32,10 @@
     "index.js"
   ],
   "scripts": {
-    "format": "prettier --ignore-path .gitignore .",
+    "format": "prettier .",
     "lint": "standard | snazzy",
     "prepare": "husky install",
-    "test": "c8 tap --node-arg=--experimental-json-modules --no-coverage"
+    "test": "tap --allow-incomplete-coverage --node-arg=--experimental-json-modules"
   },
   "dependencies": {
     "chalk": "^5.0.0",
@@ -45,15 +45,14 @@
     "xml2js": "^0.6.0"
   },
   "devDependencies": {
-    "c8": "8.0.0",
     "husky": "8.0.3",
-    "lint-staged": "13.2.3",
-    "nock": "13.3.1",
-    "prettier": "3.0.0",
-    "prettier-plugin-packagejson": "2.4.4",
+    "lint-staged": "15.2.0",
+    "nock": "13.4.0",
+    "prettier": "3.1.1",
+    "prettier-plugin-packagejson": "2.4.7",
     "snazzy": "9.0.0",
     "standard": "17.1.0",
-    "tap": "16.3.7"
+    "tap": "18.6.1"
   },
   "engines": {
     "node": ">=16"
