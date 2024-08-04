@@ -1,10 +1,9 @@
 # SRO
 
 [![npm package version](https://img.shields.io/npm/v/sro.svg)](https://www.npmjs.com/package/sro)
-[![Build status](https://img.shields.io/github/workflow/status/rbardini/sro/Main)](https://github.com/rbardini/sro/actions)
+[![Build status](https://img.shields.io/github/actions/workflow/status/rbardini/sro/main.yml)](https://github.com/rbardini/sro/actions)
 [![Code coverage](https://img.shields.io/codecov/c/github/rbardini/sro.svg)](https://codecov.io/gh/rbardini/sro)
 [![Dependencies status](https://img.shields.io/librariesio/release/npm/sro)](https://libraries.io/npm/sro)
-[![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 📦🔍 Friendly Correios SRO API wrapper and command-line utility.
 
